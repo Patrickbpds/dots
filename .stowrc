@@ -1,0 +1,55 @@
+# Stow configuration file
+# This file defines patterns to ignore when stowing dotfiles
+
+# Version control
+--ignore=\.git
+--ignore=\.gitignore
+--ignore=\.gitmodules
+
+# Documentation
+--ignore=README\.md
+--ignore=LICENSE
+--ignore=\.stowrc
+
+# Temporary and cache files
+--ignore=.*\.tmp
+--ignore=.*\.cache
+--ignore=.*\.log
+--ignore=.*\.pid
+--ignore=.*\.lock
+--ignore=.*\.swp
+--ignore=.*\.swo
+--ignore=.*~
+
+# OS specific files
+--ignore=\.DS_Store
+--ignore=Thumbs\.db
+--ignore=desktop\.ini
+
+# Application specific caches and data
+--ignore=.*cache.*
+--ignore=.*Cache.*
+--ignore=.*logs.*
+--ignore=.*Logs.*
+--ignore=.*sessions.*
+--ignore=.*Sessions.*
+--ignore=.*history.*
+--ignore=.*History.*
+
+# Compiled files
+--ignore=.*\.pyc
+--ignore=.*\.pyo
+--ignore=.*\.o
+--ignore=.*\.so
+--ignore=.*\.dll
+--ignore=.*\.exe
+
+# Node modules and similar
+--ignore=node_modules
+--ignore=\.npm
+--ignore=\.yarn
+
+# IDE and editor specific
+--ignore=\.vscode
+--ignore=\.idea
+--ignore=.*\.sublime-.*
