@@ -203,6 +203,7 @@ Singleton {
                     property string action: "/"
                     property string clipboard: ";"
                     property string emojis: ":"
+                    property string web: "!"
                 }
             }
 

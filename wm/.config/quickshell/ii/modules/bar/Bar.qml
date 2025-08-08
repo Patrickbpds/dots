@@ -571,15 +571,15 @@ Scope {
         target: "bar"
 
         function toggle(): void {
-            GlobalStates.barOpen = !GlobalStates.barOpen
+            GlobalStates.barOpen = !GlobalStates.barOpen;
         }
 
         function close(): void {
-            GlobalStates.barOpen = false
+            GlobalStates.barOpen = false;
         }
 
         function open(): void {
-            GlobalStates.barOpen = true
+            GlobalStates.barOpen = true;
         }
     }
 

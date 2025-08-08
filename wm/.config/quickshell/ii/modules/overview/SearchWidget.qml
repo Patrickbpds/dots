@@ -12,6 +12,7 @@ import Quickshell.Io
 
 Item { // Wrapper
     id: root
+    
     readonly property string xdgConfigHome: Directories.config
     property string searchingText: ""
     property bool showResults: searchingText != ""
@@ -138,6 +139,33 @@ Item { // Wrapper
             }
             // If already focused, let TextField handle it
             return;
+        }
+
+        // Handle vim-style navigation with Ctrl+N (next) and Ctrl+P (previous)
+        if (event.modifiers & Qt.ControlModifier) {
+            if (event.key === Qt.Key_N) {
+                // Move down in the list
+                if (appResults.count > 0) {
+                    if (appResults.currentIndex < appResults.count - 1) {
+                        appResults.currentIndex++;
+                    } else {
+                        appResults.currentIndex = 0; // Wrap to top
+                    }
+                }
+                event.accepted = true;
+                return;
+            } else if (event.key === Qt.Key_P) {
+                // Move up in the list
+                if (appResults.count > 0) {
+                    if (appResults.currentIndex > 0) {
+                        appResults.currentIndex--;
+                    } else {
+                        appResults.currentIndex = appResults.count - 1; // Wrap to bottom
+                    }
+                }
+                event.accepted = true;
+                return;
+            }
         }
 
         // Only handle visible printable characters (ignore control chars, arrows, etc.)
@@ -292,9 +320,9 @@ Item { // Wrapper
                                     cliphistRawString: entry,
                                     name: entry.replace(/^\s*\S+\s+/, ""),
                                     clickActionName: "",
-                                    type: `#${entry.match(/^\s*(\S+)/)?.[1] || ""}`,
+                                    type: `#${entry.match(/^\s*(\S+)/)[1] || ""}`,
                                     execute: () => {
-                                        Cliphist.copy(entry)
+                                        Cliphist.copy(entry);
                                     },
                                     actions: [
                                         {
@@ -309,20 +337,47 @@ Item { // Wrapper
                             }).filter(Boolean);
                         }
                         if (root.searchingText.startsWith(Config.options.search.prefix.emojis)) {
-                            // Clipboard
+                            // Emojis
                             const searchString = root.searchingText.slice(Config.options.search.prefix.emojis.length);
                             return Emojis.fuzzyQuery(searchString).map(entry => {
                                 return {
                                     cliphistRawString: entry,
-                                    bigText: entry.match(/^\s*(\S+)/)?.[1] || "",
+                                    bigText: entry.match(/^\s*(\S+)/)[1] || "",
                                     name: entry.replace(/^\s*\S+\s+/, ""),
                                     clickActionName: "",
                                     type: "Emoji",
                                     execute: () => {
-                                        Quickshell.clipboardText = entry.match(/^\s*(\S+)/)?.[1];
+                                        Quickshell.clipboardText = entry.match(/^\s*(\S+)/)[1];
                                     }
                                 };
                             }).filter(Boolean);
+                        }
+                        if (root.searchingText.startsWith(Config.options.search.prefix.web)) {
+                            // Web search with DuckDuckGo bang support
+                            let searchQuery = root.searchingText;
+                            let displayName = searchQuery;
+                            
+                            // Check if there's a space after the prefix
+                            if (searchQuery.startsWith(Config.options.search.prefix.web + " ")) {
+                                // Remove the prefix entirely for normal search
+                                searchQuery = searchQuery.substring(Config.options.search.prefix.web.length + 1);
+                                displayName = searchQuery;
+                            }
+                            // Otherwise keep the prefix for DuckDuckGo bangs (e.g., !gi corgi)
+                            
+                            return [{
+                                name: displayName,
+                                clickActionName: Translation.tr("Search"),
+                                type: Translation.tr("Search the web"),
+                                materialSymbol: 'travel_explore',
+                                execute: () => {
+                                    let url = Config.options.search.engineBaseUrl + searchQuery;
+                                    for (let site of Config.options.search.excludedSites) {
+                                        url += ` -site:${site}`;
+                                    }
+                                    Qt.openUrlExternally(url);
+                                }
+                            }];
                         }
 
                         ////////////////// Init ///////////////////
@@ -387,6 +442,7 @@ Item { // Wrapper
                         }
 
                         ///////////////// Web search ////////////////
+                        // Add normal web search option for non-prefixed searches
                         result.push({
                             name: root.searchingText,
                             clickActionName: Translation.tr("Search"),

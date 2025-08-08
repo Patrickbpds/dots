@@ -184,6 +184,15 @@ ContentPage {
                         Config.options.search.prefix.emojis = text;
                     }
                 }
+                MaterialTextField {
+                    Layout.fillWidth: true
+                    placeholderText: Translation.tr("Web search")
+                    text: Config.options.search.prefix.web
+                    wrapMode: TextEdit.Wrap
+                    onTextChanged: {
+                        Config.options.search.prefix.web = text;
+                    }
+                }
             }
         }
         ContentSubsection {
