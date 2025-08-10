@@ -13,6 +13,17 @@ import Quickshell.Io
 Item { // Wrapper
     id: root
     
+    // Refresh app list when the overview opens
+    Connections {
+        target: GlobalStates
+        function onOverviewOpenChanged() {
+            if (GlobalStates.overviewOpen) {
+                console.log("[SearchWidget] Overview opened, triggering app refresh");
+                AppSearch.refreshAppList();
+            }
+        }
+    }
+    
     readonly property string xdgConfigHome: Directories.config
     property string searchingText: ""
     property bool showResults: searchingText != ""

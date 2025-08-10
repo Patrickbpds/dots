@@ -52,3 +52,12 @@ end
 set --erase _asdf_shims
 
 fish_ssh_agent
+
+set -gx PATH ~/.local/share/nvim/mason/bin $PATH
+set -x QMLLS_BUILD_DIRS /usr/lib/qt6/qml
+set -gx QML_IMPORT_PATH "$PWD"
+fish_add_path $HOME/.local/bin
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH
