@@ -99,23 +99,20 @@ Multiple sources approach:
 
 ## Subagent Delegation
 
-Leverage specialized research subagents:
-- @explorer for codebase structure mapping
-- @searcher for advanced code search
-- @documenter for organizing findings
-- @synthesizer for creating insights
-- @api-designer for API research
+ALWAYS delegate to these broader subagents:
+- ALWAYS use @researcher to gather external knowledge and sources
+- ALWAYS use @synthesizer to condense findings into structured insights
+- ALWAYS use @documenter to write to docs/research/[topic]-research.md
+- ALWAYS use @formatter to keep document structure clean
+- Use @tracer to link research findings back to related plans
 
 ## Research Outputs
 
 ### Research Report Template
-Create in `docs/research/`:
+ALWAYS Create in `docs/research/` with kebab-case naming (no dates):
 
 ```markdown
-# Research: [Topic]
-Date: YYYY-MM-DD
-Researcher: research
-Status: [In Progress|Complete]
+# [Topic] Research
 
 ## Executive Summary
 Brief overview of findings and recommendations
@@ -170,8 +167,7 @@ Brief overview of findings and recommendations
 For rapid research tasks:
 
 ```markdown
-# Quick Discovery: [Topic]
-Date: YYYY-MM-DD
+# [Topic] Quick Discovery
 
 ## Question
 What we need to know

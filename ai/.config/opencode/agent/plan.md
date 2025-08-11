@@ -57,46 +57,18 @@ Follow this structured approach for all planning tasks:
 
 ## Document Structure
 
-Always create plans following this template in `docs/plans/YYYY-MM-DD-feature-name.md`:
-
-```markdown
-# Plan: [Feature Name]
-Date: YYYY-MM-DD
-Status: Planning
-Agent: plan
-Implementer: implement
-
-## Context
-### Problem Statement
-### Current State
-### Goals
-### Constraints
-
-## Specification
-### Functional Requirements
-### Non-Functional Requirements
-### API Design
-### Data Model
-
-## Implementation Plan
-### Phase 1: Foundation
-### Phase 2: Core Features
-### Phase 3: Integration
-### Phase 4: Testing & Validation
-
-## Risk Mitigation
-## Success Metrics
-## Dev Log
-```
+Always create plans in `docs/plans/` with kebab-case naming (no dates):
+- Example: `agents-refactor-plan.md`, `feature-x-plan.md`
 
 ## Subagent Delegation
 
-Actively delegate to specialized subagents:
-- Use @architect for system design decisions
-- Use @spec-writer for detailed technical specifications
-- Use @risk-analyzer for comprehensive risk assessment
-- Use @plan-documenter to create the final plan document
-- Use @api-designer for API specifications
+ALWAYS delegate to these broader subagents in sequence:
+- ALWAYS use @synthesizer to outline and structure initial content
+- ALWAYS use @documenter to create/update docs/plans/[topic]-plan.md with plan structure
+- ALWAYS use @tracer to ensure tasks have acceptance criteria and are traceable
+- ALWAYS use @formatter to keep structure consistent and shallow
+- Use @researcher when external information is needed
+- Use @architect for major system design decisions
 
 ## Quality Standards
 

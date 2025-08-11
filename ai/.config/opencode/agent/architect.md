@@ -1,5 +1,5 @@
 ---
-description: System design and architecture decisions specialist
+description: ALWAYS use this when designing system architecture, making technology choices, or planning major structural changes
 mode: subagent
 temperature: 0.1
 tools:

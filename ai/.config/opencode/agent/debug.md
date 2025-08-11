@@ -63,12 +63,12 @@ Follow this process:
 
 ## Subagent Delegation
 
-Leverage specialized debugging subagents:
-- @log-analyzer for parsing logs and errors
-- @tracer for execution flow analysis
-- @reproducer for creating minimal reproductions
-- @fixer for applying targeted fixes
-- @profiler for performance issues
+ALWAYS delegate to these broader subagents:
+- ALWAYS use @validator to run diagnostic probes and checks
+- ALWAYS use @synthesizer to organize findings and hypotheses
+- ALWAYS use @documenter to create/update docs/debug/[topic]-debug.md
+- ALWAYS use @executor to apply fixes once root cause identified
+- ALWAYS use @formatter to keep debug reports clean
 
 ## Debugging Techniques
 
@@ -102,11 +102,10 @@ Leverage specialized debugging subagents:
 
 ## Documentation
 
-Create debug reports in `docs/debug/`:
+Create debug reports in `docs/debug/` with kebab-case naming (no dates):
 
 ```markdown
-# Debug Report: [Issue Description]
-Date: YYYY-MM-DD
+# [Issue] Debug Report
 Severity: [Critical|High|Medium|Low]
 
 ## Issue Description
