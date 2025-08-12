@@ -1,0 +1,70 @@
+# Claude/AI related
+ai/.claude/statsig/
+ai/.claude/.credentials.json
+ai/.claude/shell-snapshots/
+ai/.claude/todos/
+ai/.config/opencode/agent/*.json
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Session and cache files
+*.session_id.*
+*.last_modified_time.*
+*.cached.*
+*.stable_id.*
+
+# Editor temporary files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Neovim
+editor/.config/nvim/lazy-lock.json
+
+# Fish shell variables
+shell/.config/fish/fish_variables
+
+# System specific
+system/.config/goxlr-utility/settings.json
+system/.config/lact/ui.yaml
+
+# Terminal plugins
+terminal/.config/tmux/plugins/
+
+# Zellij plugins
+terminal/.config/zellij/plugins/
+
+# Theme generated files
+theme/.config/gtk-3.0/gtk.css
+theme/.config/gtk-4.0/gtk.css
+theme/.config/qt5ct/qt5ct.conf
+theme/.config/qt6ct/qt6ct.conf
+
+# WM specific runtime files
+wm/.config/fuzzel/fuzzel.ini
+wm/.config/hypr/hyprland/*.conf.bak
+
+# Tool specific
+tools/.config/btop/btop.conf
+tools/.config/lazygit/state.yml
+tools/.config/ranger/__pycache__/
+tools/.config/ranger/plugins/__pycache__/
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Log files
+*.log
+
+# Temporary files
+tmp/
+temp/
+.tmp/
