@@ -49,16 +49,11 @@ Follow this structured approach for all planning tasks:
 - Specify test requirements for each task
 - Ensure backward compatibility
 
-### 4. Risk Mitigation
-- Identify technical risks
-- Assess impact and probability
-- Define mitigation strategies
-- Plan rollback procedures
-
 ## Document Structure
 
 Always create plans in `docs/plans/` with kebab-case naming (no dates):
 - Example: `agents-refactor-plan.md`, `feature-x-plan.md`
+- ALWAYS output the created plan with its path to the user. This should be always your last message.
 
 ## Subagent Delegation
 

@@ -15,6 +15,15 @@
 - **implement**: Executes plans with continuous validation → updates plan documents and Dev Logs
 - **research**: Deep exploration and knowledge gathering → creates docs/research/[topic]-research.md
 - **debug**: Systematic issue investigation → creates docs/debug/[topic]-debug.md
+- **test**: Comprehensive testing specialist → creates meaningful unit tests with excellent coverage and best practices
+
+### Testing Subagents
+- **test-analyzer**: Analyzes code to identify test scenarios, edge cases, and coverage opportunities
+- **test-generator**: Creates high-quality test implementations following language-specific best practices
+- **test-coverage**: Analyzes coverage metrics and identifies meaningful gaps
+- **test-validator**: Ensures test quality and prevents placeholder or low-quality tests
+- **test-documenter**: Creates and maintains test documentation, plans, and reports
+- **test-researcher**: Researches testing best practices and patterns for specific technologies
 
 ### Broader Subagents
 - **documenter**: Creates/updates all documentation, adapts structure to invoking context
