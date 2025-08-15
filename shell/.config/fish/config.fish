@@ -13,9 +13,10 @@ if status is-interactive
 end
 
 starship init fish | source
-if test -f ~/.local/state/quickshell/user/generated/terminal/sequences.txt
-    cat ~/.local/state/quickshell/user/generated/terminal/sequences.txt
-end
+# Disabled quickshell terminal sequences - they override kitty themes
+# if test -f ~/.local/state/quickshell/user/generated/terminal/sequences.txt
+#     cat ~/.local/state/quickshell/user/generated/terminal/sequences.txt
+# end
 
 alias pamcan pacman
 alias ls 'eza --icons'
