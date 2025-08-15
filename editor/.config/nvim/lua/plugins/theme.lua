@@ -8,40 +8,6 @@ if heimdall_ok and type(heimdall_module) == "table" then
   color_overrides = heimdall_module.color_overrides or {}
 end
 
--- Cache for mode colors to prevent recalculation
-local mode_color_cache = {}
-local current_colors = colors
-
-local function get_mode_colors(new_colors)
-  -- Only rebuild cache if colors changed
-  if new_colors ~= current_colors then
-    current_colors = new_colors
-    mode_color_cache = {
-      n = new_colors.blue,
-      i = new_colors.mauve,
-      v = new_colors.pink,
-      [""] = colors.pink,
-      V = new_colors.pink,
-      c = new_colors.green,
-      no = new_colors.blue,
-      s = new_colors.peach,
-      S = new_colors.peach,
-      [""] = colors.peach,
-      ic = new_colors.red,
-      R = new_colors.lavender,
-      RR = new_colors.lavender,
-      cv = new_colors.blue,
-      ce = new_colors.blue,
-      r = new_colors.teal,
-      rm = new_colors.teal,
-      ["r?"] = new_colors.teal,
-      ["!"] = new_colors.blue,
-      t = new_colors.blue,
-    }
-  end
-  return mode_color_cache
-end
-
 local function setup_catppuccin(new_colors, new_color_overrides)
   new_colors = new_colors or colors
   new_color_overrides = new_color_overrides or color_overrides
@@ -61,8 +27,29 @@ local function setup_lualine(new_colors)
   new_colors = new_colors or colors
   local lualine = require("lualine")
 
-  -- Pre-calculate mode colors to avoid recalculation
-  local mode_colors = get_mode_colors(new_colors)
+  -- Build mode colors table locally (but allow dynamic mode evaluation)
+  local mode_colors = {
+    n = new_colors.blue,
+    i = new_colors.mauve,
+    v = new_colors.pink,
+    [""] = new_colors.pink,
+    V = new_colors.pink,
+    c = new_colors.green,
+    no = new_colors.blue,
+    s = new_colors.peach,
+    S = new_colors.peach,
+    [""] = new_colors.peach,
+    ic = new_colors.red,
+    R = new_colors.lavender,
+    RR = new_colors.lavender,
+    cv = new_colors.blue,
+    ce = new_colors.blue,
+    r = new_colors.teal,
+    rm = new_colors.teal,
+    ["r?"] = new_colors.teal,
+    ["!"] = new_colors.blue,
+    t = new_colors.blue,
+  }
 
   local conditions = {
     buffer_not_empty = function()
@@ -113,23 +100,23 @@ local function setup_lualine(new_colors)
     table.insert(config.sections.lualine_x, component)
   end
 
-  -- Mode indicator 1 - use cached colors
   ins_left({
     function()
       return ""
     end,
     color = function()
-      return { fg = mode_colors[vim.fn.mode()] }
+      local mode = vim.fn.mode()
+      return { fg = mode_colors[mode] or new_colors.text }
     end,
   })
 
-  -- Mode indicator 2 - use cached colors
   ins_left({
     function()
       return ""
     end,
     color = function()
-      return { fg = mode_colors[vim.fn.mode()] }
+      local mode = vim.fn.mode()
+      return { fg = mode_colors[mode] or new_colors.text }
     end,
   })
 
@@ -418,10 +405,6 @@ return {
                 package.loaded["catppuccin"] = nil
                 package.loaded["lualine"] = nil
                 package.loaded["incline"] = nil
-
-                -- Update cached mode colors
-                mode_color_cache = {}
-                current_colors = new_colors
 
                 -- Reconfigure plugins
                 setup_catppuccin(new_colors, new_color_overrides)
