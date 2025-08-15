@@ -1,38 +1,12 @@
+local heimdall_ok, heimdall = pcall(require, "user.heimdall")
+local colors = heimdall_ok and heimdall.colors or {}
+
 return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
       local lualine = require("lualine")
-
-      local colors = {
-        bg = "#1e1e2e00",
-        fg = "#cdd6f4",
-        rosewater = "#f5e0dc",
-        flamingo = "#f2cdcd",
-        pink = "#f5c2e7",
-        mauve = "#cba6f7",
-        red = "#f38ba8",
-        maroon = "#eba0ac",
-        peach = "#fab387",
-        yellow = "#f9e2af",
-        green = "#a6e3a1",
-        teal = "#94e2d5",
-        sky = "#89dceb",
-        sapphire = "#74c7ec",
-        blue = "#89b4fa",
-        lavender = "#b4befe",
-        subtext_1 = "#a6adc8",
-        subtext_0 = "#bac2de",
-        overlay_2 = "#9399b2",
-        overlay_1 = "#7f849c",
-        overlay_0 = "#6c7086",
-        surface_2 = "#585b70",
-        surface_1 = "#45475a",
-        surface_0 = "#313244",
-        mantle = "#181825",
-        crust = "#11111b",
-      }
 
       local conditions = {
         buffer_not_empty = function()
@@ -58,8 +32,8 @@ return {
             -- We are going to use lualine_c an lualine_x as left and
             -- right section. Both are highlighted by c theme .  So we
             -- are just setting default looks o statusline
-            normal = { c = { fg = colors.fg, bg = colors.bg } },
-            inactive = { c = { fg = colors.fg, bg = colors.bg } },
+            normal = { c = { fg = colors.text, bg = colors.base } },
+            inactive = { c = { fg = colors.text, bg = colors.base } },
           },
         },
         sections = {
@@ -181,12 +155,12 @@ return {
         function()
           return "|"
         end,
-        color = { fg = colors.surface_0 },
+        color = { fg = colors.surface0 },
       })
 
-      ins_left({ "location", color = { fg = colors.overlay_0 } })
+      ins_left({ "location", color = { fg = colors.overlay0 } })
 
-      ins_left({ "progress", color = { fg = colors.overlay_0, gui = "bold" } })
+      ins_left({ "progress", color = { fg = colors.overlay0, gui = "bold" } })
 
       ins_left({
         "diagnostics",
@@ -214,7 +188,7 @@ return {
         max_length = vim.o.columns * 0.25,
         buffers_color = {
           active = { fg = colors.mauve },
-          inactive = { fg = colors.surface_0 },
+          inactive = { fg = colors.surface0 },
         },
       })
 
@@ -249,7 +223,7 @@ return {
         function()
           return "|"
         end,
-        color = { fg = colors.surface_0 },
+        color = { fg = colors.surface0 },
       })
 
       ins_right({
