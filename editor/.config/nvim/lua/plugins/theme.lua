@@ -8,6 +8,38 @@ if heimdall_ok and type(heimdall_module) == "table" then
   color_overrides = heimdall_module.color_overrides or {}
 end
 
+-- Global colors reference that gets updated on hot-reload
+local global_colors = colors
+
+-- Global mode colors table that gets updated on hot-reload
+local global_mode_colors = {}
+
+-- Initialize global_mode_colors with default colors if available
+if next(colors) ~= nil then
+  global_mode_colors = {
+    n = colors.blue,
+    i = colors.mauve,
+    v = colors.pink,
+    [""] = colors.pink,
+    V = colors.pink,
+    c = colors.green,
+    no = colors.blue,
+    s = colors.peach,
+    S = colors.peach,
+    [""] = colors.peach,
+    ic = colors.red,
+    R = colors.lavender,
+    RR = colors.lavender,
+    cv = colors.blue,
+    ce = colors.blue,
+    r = colors.teal,
+    rm = colors.teal,
+    ["r?"] = colors.teal,
+    ["!"] = colors.blue,
+    t = colors.blue,
+  }
+end
+
 local function setup_catppuccin(new_colors, new_color_overrides)
   new_colors = new_colors or colors
   new_color_overrides = new_color_overrides or color_overrides
@@ -23,33 +55,38 @@ local function setup_catppuccin(new_colors, new_color_overrides)
   })
 end
 
+-- Helper to update global mode colors without recreating lualine
+local function update_mode_colors(new_colors)
+  global_mode_colors.n = new_colors.blue
+  global_mode_colors.i = new_colors.mauve
+  global_mode_colors.v = new_colors.pink
+  global_mode_colors[""] = new_colors.pink
+  global_mode_colors.V = new_colors.pink
+  global_mode_colors.c = new_colors.green
+  global_mode_colors.no = new_colors.blue
+  global_mode_colors.s = new_colors.peach
+  global_mode_colors.S = new_colors.peach
+  global_mode_colors[""] = new_colors.peach
+  global_mode_colors.ic = new_colors.red
+  global_mode_colors.R = new_colors.lavender
+  global_mode_colors.RR = new_colors.lavender
+  global_mode_colors.cv = new_colors.blue
+  global_mode_colors.ce = new_colors.blue
+  global_mode_colors.r = new_colors.teal
+  global_mode_colors.rm = new_colors.teal
+  global_mode_colors["r?"] = new_colors.teal
+  global_mode_colors["!"] = new_colors.blue
+  global_mode_colors.t = new_colors.blue
+end
+
 local function setup_lualine(new_colors)
   new_colors = new_colors or colors
   local lualine = require("lualine")
 
-  -- Build mode colors table locally (but allow dynamic mode evaluation)
-  local mode_colors = {
-    n = new_colors.blue,
-    i = new_colors.mauve,
-    v = new_colors.pink,
-    [""] = new_colors.pink,
-    V = new_colors.pink,
-    c = new_colors.green,
-    no = new_colors.blue,
-    s = new_colors.peach,
-    S = new_colors.peach,
-    [""] = new_colors.peach,
-    ic = new_colors.red,
-    R = new_colors.lavender,
-    RR = new_colors.lavender,
-    cv = new_colors.blue,
-    ce = new_colors.blue,
-    r = new_colors.teal,
-    rm = new_colors.teal,
-    ["r?"] = new_colors.teal,
-    ["!"] = new_colors.blue,
-    t = new_colors.blue,
-  }
+  -- Update global colors reference
+  global_colors = new_colors
+  -- Update the global mode colors
+  update_mode_colors(new_colors)
 
   local conditions = {
     buffer_not_empty = function()
@@ -70,8 +107,8 @@ local function setup_lualine(new_colors)
       component_separators = "",
       section_separators = "",
       theme = {
-        normal = { c = { fg = new_colors.text, bg = new_colors.base } },
-        inactive = { c = { fg = new_colors.text, bg = new_colors.base } },
+        normal = { c = { fg = global_colors.text, bg = global_colors.base } },
+        inactive = { c = { fg = global_colors.text, bg = global_colors.base } },
       },
     },
     sections = {
@@ -106,7 +143,7 @@ local function setup_lualine(new_colors)
     end,
     color = function()
       local mode = vim.fn.mode()
-      return { fg = mode_colors[mode] or new_colors.text }
+      return { fg = global_mode_colors[mode] or global_colors.text }
     end,
   })
 
@@ -116,35 +153,55 @@ local function setup_lualine(new_colors)
     end,
     color = function()
       local mode = vim.fn.mode()
-      return { fg = mode_colors[mode] or new_colors.text }
+      return { fg = global_mode_colors[mode] or global_colors.text }
     end,
   })
 
   ins_left({
     "filename",
     cond = conditions.buffer_not_empty,
-    color = { fg = new_colors.lavender, gui = "bold" },
+    color = function()
+      return { fg = global_colors.lavender, gui = "bold" }
+    end,
   })
 
   ins_left({
     function()
       return "|"
     end,
-    color = { fg = new_colors.surface0 },
+    color = function()
+      return { fg = global_colors.surface0 }
+    end,
   })
 
-  ins_left({ "location", color = { fg = new_colors.overlay0 } })
+  ins_left({
+    "location",
+    color = function()
+      return { fg = global_colors.overlay0 }
+    end,
+  })
 
-  ins_left({ "progress", color = { fg = new_colors.overlay0, gui = "bold" } })
+  ins_left({
+    "progress",
+    color = function()
+      return { fg = global_colors.overlay0, gui = "bold" }
+    end,
+  })
 
   ins_left({
     "diagnostics",
     sources = { "nvim_diagnostic" },
     symbols = { error = " ", warn = " ", info = " " },
     diagnostics_color = {
-      color_error = { fg = new_colors.red },
-      color_warn = { fg = new_colors.yellow },
-      color_info = { fg = new_colors.teal },
+      color_error = function()
+        return { fg = global_colors.red }
+      end,
+      color_warn = function()
+        return { fg = global_colors.yellow }
+      end,
+      color_info = function()
+        return { fg = global_colors.teal }
+      end,
     },
   })
 
@@ -160,15 +217,30 @@ local function setup_lualine(new_colors)
     mode = 1,
     max_length = vim.o.columns * 0.25,
     buffers_color = {
-      active = { fg = new_colors.mauve },
-      inactive = { fg = new_colors.surface0 },
+      active = function()
+        return { fg = global_colors.mauve }
+      end,
+      inactive = function()
+        return { fg = global_colors.surface0 }
+      end,
     },
   })
 
   ins_right({
     "branch",
     icon = "  ",
-    color = { fg = new_colors.lavender, gui = "bold" },
+    color = function()
+      return { fg = global_colors.lavender, gui = "bold" }
+    end,
+  })
+
+  ins_right({
+    function()
+      return "|"
+    end,
+    color = function()
+      return { fg = global_colors.surface0 }
+    end,
   })
 
   ins_right({
@@ -188,33 +260,7 @@ local function setup_lualine(new_colors)
       return msg
     end,
     icon = "  ",
-    color = { fg = new_colors.lavender, gui = "bold" },
-  })
-
-  ins_right({
-    function()
-      return "|"
-    end,
-    color = { fg = new_colors.surface0 },
-  })
-
-  ins_right({
-    "o:encoding",
-    cond = conditions.hide_in_width,
-    color = { fg = new_colors.blue, gui = "bold" },
-  })
-
-  ins_right({
-    function()
-      return ""
-    end,
-    color = { fg = new_colors.blue },
-  })
-
-  ins_right({
-    "fileformat",
-    icons_enabled = true,
-    color = { fg = new_colors.blue, gui = "bold" },
+    color = { fg = global_colors.lavender, gui = "bold" },
   })
 
   lualine.setup(config)
@@ -400,22 +446,28 @@ return {
                 -- Update global colors
                 colors = new_colors
                 color_overrides = new_color_overrides
+                global_colors = new_colors
 
-                -- Clear plugin caches only when needed
+                -- Clear plugin caches
                 package.loaded["catppuccin"] = nil
-                package.loaded["lualine"] = nil
                 package.loaded["incline"] = nil
 
-                -- Reconfigure plugins
+                -- Reconfigure catppuccin and incline
                 setup_catppuccin(new_colors, new_color_overrides)
-                setup_lualine(new_colors)
                 setup_incline(new_colors)
+
+                -- Update mode colors
+                update_mode_colors(new_colors)
 
                 vim.cmd(":silent! colorscheme catppuccin-mocha")
                 vim.cmd(":silent! doautocmd ColorScheme")
 
-                -- Only refresh lualine, not reload it
-                vim.cmd(":silent! LualineRefresh")
+                -- We need to reconfigure lualine to update the theme background
+                -- But do it in a deferred way to minimize blinking
+                vim.defer_fn(function()
+                  package.loaded["lualine"] = nil
+                  setup_lualine(new_colors)
+                end, 1)
 
                 vim.notify("Theme colors updated successfully", vim.log.levels.INFO, { title = "Heimdall" })
               end
