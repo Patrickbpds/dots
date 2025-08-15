@@ -1,3 +1,4 @@
+-- Load heimdall colors at startup (before any plugin setup)
 local heimdall_ok, heimdall_module = pcall(require, "user.heimdall")
 local colors = {}
 local color_overrides = {}
@@ -5,6 +6,40 @@ local color_overrides = {}
 if heimdall_ok and type(heimdall_module) == "table" then
   colors = heimdall_module.colors or {}
   color_overrides = heimdall_module.color_overrides or {}
+end
+
+-- Cache for mode colors to prevent recalculation
+local mode_color_cache = {}
+local current_colors = colors
+
+local function get_mode_colors(new_colors)
+  -- Only rebuild cache if colors changed
+  if new_colors ~= current_colors then
+    current_colors = new_colors
+    mode_color_cache = {
+      n = new_colors.blue,
+      i = new_colors.mauve,
+      v = new_colors.pink,
+      [""] = colors.pink,
+      V = new_colors.pink,
+      c = new_colors.green,
+      no = new_colors.blue,
+      s = new_colors.peach,
+      S = new_colors.peach,
+      [""] = colors.peach,
+      ic = new_colors.red,
+      R = new_colors.lavender,
+      RR = new_colors.lavender,
+      cv = new_colors.blue,
+      ce = new_colors.blue,
+      r = new_colors.teal,
+      rm = new_colors.teal,
+      ["r?"] = new_colors.teal,
+      ["!"] = new_colors.blue,
+      t = new_colors.blue,
+    }
+  end
+  return mode_color_cache
 end
 
 local function setup_catppuccin(new_colors, new_color_overrides)
@@ -25,6 +60,9 @@ end
 local function setup_lualine(new_colors)
   new_colors = new_colors or colors
   local lualine = require("lualine")
+
+  -- Pre-calculate mode colors to avoid recalculation
+  local mode_colors = get_mode_colors(new_colors)
 
   local conditions = {
     buffer_not_empty = function()
@@ -75,65 +113,23 @@ local function setup_lualine(new_colors)
     table.insert(config.sections.lualine_x, component)
   end
 
+  -- Mode indicator 1 - use cached colors
   ins_left({
     function()
       return ""
     end,
     color = function()
-      local mode_color = {
-        n = new_colors.blue,
-        i = new_colors.mauve,
-        v = new_colors.pink,
-        [""] = new_colors.pink,
-        V = new_colors.pink,
-        c = new_colors.green,
-        no = new_colors.blue,
-        s = new_colors.peach,
-        S = new_colors.peach,
-        [""] = new_colors.peach,
-        ic = new_colors.red,
-        R = new_colors.lavender,
-        RR = new_colors.lavender,
-        cv = new_colors.blue,
-        ce = new_colors.blue,
-        r = new_colors.teal,
-        rm = new_colors.teal,
-        ["r?"] = new_colors.teal,
-        ["!"] = new_colors.blue,
-        t = new_colors.blue,
-      }
-      return { fg = mode_color[vim.fn.mode()] }
+      return { fg = mode_colors[vim.fn.mode()] }
     end,
   })
 
+  -- Mode indicator 2 - use cached colors
   ins_left({
     function()
       return ""
     end,
     color = function()
-      local mode_color = {
-        n = new_colors.blue,
-        i = new_colors.mauve,
-        v = new_colors.pink,
-        [""] = new_colors.pink,
-        V = new_colors.pink,
-        c = new_colors.green,
-        no = new_colors.blue,
-        s = new_colors.peach,
-        S = new_colors.peach,
-        [""] = new_colors.peach,
-        ic = new_colors.red,
-        R = new_colors.lavender,
-        RR = new_colors.lavender,
-        cv = new_colors.blue,
-        ce = new_colors.blue,
-        r = new_colors.teal,
-        rm = new_colors.teal,
-        ["r?"] = new_colors.teal,
-        ["!"] = new_colors.blue,
-        t = new_colors.blue,
-      }
-      return { fg = mode_color[vim.fn.mode()] }
+      return { fg = mode_colors[vim.fn.mode()] }
     end,
   })
 
@@ -289,7 +285,7 @@ local function setup_incline(new_colors)
         local grapple_status
         grapple_status = require("grapple").name_or_index({ buffer = props.buf }) or ""
         if grapple_status ~= "" then
-          grapple_status = { { " 󰛢 ", guifg = colors.sky }, { grapple_status, guifg = colors.sky } }
+          grapple_status = { { " 󰛢 ", guifg = new_colors.sky }, { grapple_status, guifg = new_colors.sky } }
         end
         return grapple_status
       end
@@ -298,22 +294,41 @@ local function setup_incline(new_colors)
         { get_diagnostics() },
         { get_grapple_status() },
         { get_filename() },
-        guibg = props.focused and colors.mantle or colors.surface0,
+        guibg = props.focused and new_colors.mantle or new_colors.surface0,
       }
     end,
   })
+end
+
+-- Initialize everything with heimdall colors if available
+local function initialize_theme()
+  if heimdall_ok and next(colors) ~= nil then
+    -- Set up catppuccin with heimdall colors
+    setup_catppuccin(colors, color_overrides)
+    -- Apply the colorscheme immediately
+    vim.cmd(":silent! colorscheme catppuccin-mocha")
+  end
 end
 
 return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    opts = setup_catppuccin,
+    priority = 1000, -- Load this before other plugins
+    config = function()
+      -- Apply heimdall colors if available, otherwise use defaults
+      setup_catppuccin(colors, color_overrides)
+      if heimdall_ok and next(colors) ~= nil then
+        vim.cmd(":silent! colorscheme catppuccin-mocha")
+      end
+    end,
   },
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    opts = setup_lualine,
+    config = function()
+      setup_lualine(colors)
+    end,
   },
   {
     "b0o/incline.nvim",
@@ -323,20 +338,42 @@ return {
       "BufNewFile",
     },
     dependencies = { "mini.icons" },
-    opts = setup_incline,
+    config = function()
+      setup_incline(colors)
+    end,
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin-mocha",
+      colorscheme = function()
+        -- Only set colorscheme if heimdall colors are not available
+        if not heimdall_ok or next(colors) == nil then
+          return "catppuccin-mocha"
+        end
+        -- Return nil to prevent LazyVim from setting a colorscheme
+        return nil
+      end,
     },
     init = function()
       local user_dir = vim.fn.stdpath("config") .. "/lua/user/"
       local heimdall_file = user_dir .. "heimdall.lua"
 
+      -- Initialize theme at startup if heimdall is available
+      if heimdall_ok and next(colors) ~= nil then
+        vim.defer_fn(function()
+          initialize_theme()
+        end, 1)
+      end
+
       local last_mtime = 0
+      local is_reloading = false -- Prevent concurrent reloads
 
       local function check_and_reload_heimdall()
+        -- Skip if already reloading
+        if is_reloading then
+          return
+        end
+
         if vim.fn.filereadable(heimdall_file) ~= 1 then
           return
         end
@@ -349,11 +386,10 @@ return {
 
         if current_mtime > last_mtime then
           last_mtime = current_mtime
+          is_reloading = true
 
+          -- Clear caches
           package.loaded["user.heimdall"] = nil
-          package.loaded["catppuccin"] = nil
-          package.loaded["lualine"] = nil
-          package.loaded["incline"] = nil
 
           vim.defer_fn(function()
             local reloaded_heimdall_ok, reloaded_heimdall_module = pcall(require, "user.heimdall")
@@ -363,28 +399,57 @@ return {
             if reloaded_heimdall_ok and type(reloaded_heimdall_module) == "table" then
               new_colors = reloaded_heimdall_module.colors or {}
               new_color_overrides = reloaded_heimdall_module.color_overrides or {}
+
+              -- Only reload if colors actually changed
+              local colors_changed = false
+              for k, v in pairs(new_colors) do
+                if colors[k] ~= v then
+                  colors_changed = true
+                  break
+                end
+              end
+
+              if colors_changed then
+                -- Update global colors
+                colors = new_colors
+                color_overrides = new_color_overrides
+
+                -- Clear plugin caches only when needed
+                package.loaded["catppuccin"] = nil
+                package.loaded["lualine"] = nil
+                package.loaded["incline"] = nil
+
+                -- Update cached mode colors
+                mode_color_cache = {}
+                current_colors = new_colors
+
+                -- Reconfigure plugins
+                setup_catppuccin(new_colors, new_color_overrides)
+                setup_lualine(new_colors)
+                setup_incline(new_colors)
+
+                vim.cmd(":silent! colorscheme catppuccin-mocha")
+                vim.cmd(":silent! doautocmd ColorScheme")
+
+                -- Only refresh lualine, not reload it
+                vim.cmd(":silent! LualineRefresh")
+
+                vim.notify("Theme colors updated successfully", vim.log.levels.INFO, { title = "Heimdall" })
+              end
             end
 
-            setup_catppuccin(new_colors, new_color_overrides)
-            setup_lualine(new_colors)
-            setup_incline(new_colors)
-
-            vim.cmd(":silent! colorscheme catppuccin-mocha")
-            vim.cmd(":silent! doautocmd ColorScheme")
-
-            vim.notify(
-              "Theme updated! Colorscheme, Lualine, Incline reloaded.",
-              vim.log.levels.INFO,
-              { title = "Auto Reload" }
-            )
-          end, 100)
+            is_reloading = false
+          end, 50) -- Reduced delay from 100ms to 50ms
         end
       end
 
       local timer = vim.uv.new_timer()
       local timer_interval_ms = 500
 
-      timer:start(timer_interval_ms, timer_interval_ms, vim.schedule_wrap(check_and_reload_heimdall))
+      -- Start timer after a small delay to ensure everything is loaded
+      vim.defer_fn(function()
+        timer:start(timer_interval_ms, timer_interval_ms, vim.schedule_wrap(check_and_reload_heimdall))
+      end, 100)
 
       vim.api.nvim_create_autocmd("VimLeavePre", {
         callback = function()
