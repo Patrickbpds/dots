@@ -24,7 +24,7 @@ Singleton {
     property alias paths: adapter.paths
 
     FileView {
-        path: `${Paths.stringify(Paths.config)}/shell.json`
+        path: `${Quickshell.env("HOME")}/.config/heimdall/shell.json`
         watchChanges: true
         onFileChanged: reload()
         onAdapterUpdated: writeAdapter()

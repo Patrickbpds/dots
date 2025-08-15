@@ -20,7 +20,7 @@ Item {
             filters: Images.validImageExtensions
             onAccepted: path => {
                 Paths.copy(path, `${Paths.home}/.face`);
-                Quickshell.execDetached(["notify-send", "-a", "caelestia-shell", "-u", "low", "-h", `STRING:image-path:${path}`, "Profile picture changed", `Profile picture changed to ${Paths.shortenHome(path)}`]);
+                Quickshell.execDetached(["notify-send", "-a", "heimdall-shell", "-u", "low", "-h", `STRING:image-path:${path}`, "Profile picture changed", `Profile picture changed to ${Paths.shortenHome(path)}`]);
             }
         }
     }

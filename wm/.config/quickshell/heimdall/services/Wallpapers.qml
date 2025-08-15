@@ -19,7 +19,7 @@ Searcher {
 
     function setWallpaper(path: string): void {
         actualCurrent = path;
-        Quickshell.execDetached(["caelestia", "wallpaper", "-f", path]);
+        Quickshell.execDetached(["heimdall", "wallpaper", "-f", path]);
     }
 
     function preview(path: string): void {
@@ -73,7 +73,7 @@ Searcher {
     Process {
         id: getPreviewColoursProc
 
-        command: ["caelestia", "wallpaper", "-p", root.previewPath]
+        command: ["heimdall", "wallpaper", "-p", root.previewPath]
         stdout: StdioCollector {
             onStreamFinished: {
                 Colours.load(text, true);

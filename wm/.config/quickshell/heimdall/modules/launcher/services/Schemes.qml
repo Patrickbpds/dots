@@ -33,7 +33,7 @@ Searcher {
         id: getSchemes
 
         running: true
-        command: ["caelestia", "scheme", "list"]
+        command: ["heimdall", "scheme", "list", "--json"]
         stdout: StdioCollector {
             onStreamFinished: {
                 const schemeData = JSON.parse(text);
@@ -61,7 +61,7 @@ Searcher {
 
         function onClicked(list: AppList): void {
             list.visibilities.launcher = false;
-            Quickshell.execDetached(["caelestia", "scheme", "set", "-n", name, "-f", flavour]);
+            Quickshell.execDetached(["heimdall", "scheme", "set", "-n", name, "-f", flavour]);
         }
     }
 }
