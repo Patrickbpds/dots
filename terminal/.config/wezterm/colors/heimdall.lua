@@ -1,33 +1,36 @@
--- Heimdall theme for WezTerm
+
 -- Generated automatically
 
 return {
   color_scheme = "Heimdall",
   color_schemes = {
     ["Heimdall"] = {
-      background = "#101415",
-      foreground = "#e0e3e4",
-      cursor_bg = "#e0e3e4",
-      cursor_fg = "#101415",
+      background = "#fdfcfc",
+      foreground = "#1a1919",
+      cursor_bg = "#1a1919",
+      cursor_fg = "#fdfcfc",
+      cursor_border = "#1a1919",
+      selection_bg = "#d8d8d8",
+      selection_fg = "#1a1919",
       ansi = {
-        "#343434", -- black
-        "#8383ff", -- red
-        "#40e1df", -- green
-        "#75fcdd", -- yellow
-        "#78b4c1", -- blue
-        "#7aaee9", -- magenta
-        "#80d7de", -- cyan
-        "#ccdcd6", -- white
+        "#ffffff", -- black
+        "#bc1010", -- red
+        "#00cb00", -- green
+        "#cacb00", -- yellow
+        "#cb0125", -- blue
+        "#38ac20", -- magenta
+        "#344598", -- cyan
+        "#343232", -- white
       },
       brights = {
-        "#9aa59f",  -- bright black
-        "#a29eff",  -- bright red
-        "#00f6f5", -- bright green
-        "#c9fff3", -- bright yellow
-        "#a4c7cd", -- bright blue
-        "#a2c0f7", -- bright magenta
-        "#87ebf1", -- bright cyan
-        "#ffffff", -- bright white
+        "#d8d8d8",  -- bright black
+        "#750909",  -- bright red
+        "#007e00", -- bright green
+        "#7d7e00", -- bright yellow
+        "#7e0017", -- bright blue
+        "#236b14", -- bright magenta
+        "#202b5f", -- bright cyan
+        "#0d0c0c", -- bright white
       },
     },
   },

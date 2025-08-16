@@ -1,17 +1,42 @@
-@define-color accent_color #c2c1ff;
-@define-color accent_fg_color #2a2a60;
-@define-color accent_bg_color #c2c1ff;
-@define-color window_bg_color #131317;
-@define-color window_fg_color #e5e1e7;
-@define-color headerbar_bg_color #131317;
-@define-color headerbar_fg_color #e5e1e7;
-@define-color popover_bg_color #131317;
-@define-color popover_fg_color #e5e1e7;
-@define-color view_bg_color #131317;
-@define-color view_fg_color #e5e1e7;
-@define-color card_bg_color #131317;
-@define-color card_fg_color #e5e1e7;
-@define-color sidebar_bg_color @window_bg_color;
-@define-color sidebar_fg_color @window_fg_color;
-@define-color sidebar_border_color @window_bg_color;
-@define-color sidebar_backdrop_color @window_bg_color;
+/* Heimdall theme for GTK */
+/* Generated automatically */
+
+@define-color background {{.colors.background}};
+@define-color surface {{.colors.surface}};
+@define-color surface_variant {{.colors.surface_variant}};
+
+@define-color primary {{.colors.primary}};
+@define-color primary_container {{.colors.primary_container}};
+@define-color secondary {{.colors.secondary}};
+@define-color secondary_container {{.colors.secondary_container}};
+
+@define-color on_background {{.colors.on_background}};
+@define-color on_surface {{.colors.on_surface}};
+@define-color on_surface_variant {{.colors.on_surface_variant}};
+
+@define-color outline {{.colors.outline}};
+@define-color outline_variant {{.colors.outline_variant}};
+
+@define-color error {{.colors.error}};
+
+/* Apply to GTK widgets */
+window {
+    background-color: @background;
+    color: @on_background;
+}
+
+button {
+    background-color: @primary;
+    color: @on_primary;
+}
+
+button:hover {
+    background-color: @primary_container;
+    color: @on_primary_container;
+}
+
+entry {
+    background-color: @surface;
+    color: @on_surface;
+    border-color: @outline;
+}
