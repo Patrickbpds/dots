@@ -20,7 +20,11 @@ Scope {
         description: "Toggle launcher, dashboard and osd"
         onPressed: {
             const v = Visibilities.getForActive();
-            v.launcher = v.dashboard = v.osd = v.utilities = !(v.launcher || v.dashboard || v.osd || v.utilities);
+            if (v) {
+                v.launcher = v.dashboard = v.osd = v.utilities = !(v.launcher || v.dashboard || v.osd || v.utilities);
+            } else {
+                console.error("[Shortcuts] Failed to get visibilities for active monitor");
+            }
         }
     }
 
@@ -29,7 +33,11 @@ Scope {
         description: "Toggle session menu"
         onPressed: {
             const visibilities = Visibilities.getForActive();
-            visibilities.session = !visibilities.session;
+            if (visibilities) {
+                visibilities.session = !visibilities.session;
+            } else {
+                console.error("[Shortcuts] Failed to get visibilities for active monitor");
+            }
         }
     }
 
@@ -40,7 +48,11 @@ Scope {
         onReleased: {
             if (!root.launcherInterrupted) {
                 const visibilities = Visibilities.getForActive();
-                visibilities.launcher = !visibilities.launcher;
+                if (visibilities) {
+                    visibilities.launcher = !visibilities.launcher;
+                } else {
+                    console.error("[Shortcuts] Failed to get visibilities for active monitor - launcher toggle failed");
+                }
             }
             root.launcherInterrupted = false;
         }
@@ -58,7 +70,11 @@ Scope {
         function toggle(drawer: string): void {
             if (list().split("\n").includes(drawer)) {
                 const visibilities = Visibilities.getForActive();
-                visibilities[drawer] = !visibilities[drawer];
+                if (visibilities) {
+                    visibilities[drawer] = !visibilities[drawer];
+                } else {
+                    console.error(`[IPC] Failed to get visibilities for active monitor - ${drawer} toggle failed`);
+                }
             } else {
                 console.warn(`[IPC] Drawer "${drawer}" does not exist`);
             }
@@ -66,7 +82,10 @@ Scope {
 
         function list(): string {
             const visibilities = Visibilities.getForActive();
-            return Object.keys(visibilities).filter(k => typeof visibilities[k] === "boolean").join("\n");
+            if (visibilities) {
+                return Object.keys(visibilities).filter(k => typeof visibilities[k] === "boolean").join("\n");
+            }
+            return "";
         }
     }
 

@@ -7,7 +7,7 @@ JsonObject {
     property string actionPrefix: ">"
     property bool enableDangerousActions: false // Allow actions that can cause losing data, like shutdown, reboot and logout
     property int dragThreshold: 50
-    property bool vimKeybinds: false
+    property bool vimKeybinds: true // Default to true, can be overridden by JSON config
     property UseFuzzy useFuzzy: UseFuzzy {}
     property Sizes sizes: Sizes {}
 
