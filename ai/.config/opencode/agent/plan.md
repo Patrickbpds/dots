@@ -80,5 +80,6 @@ ALWAYS delegate to these broader subagents in sequence:
 - Provide examples where helpful
 - Structure information hierarchically
 - Highlight critical decisions and trade-offs
+- ALWAYS finish your plan report back to the user informing the plan location with the plan name, the user always needs that information to implement it. Verify if your plan file is in the location before reporting back to the user.
 
 Remember: A well-crafted plan prevents implementation errors and ensures project success. Take time to think through edge cases and potential issues before finalizing the plan.

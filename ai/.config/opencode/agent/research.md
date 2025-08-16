@@ -229,5 +229,6 @@ Next steps based on findings
 - Provide concrete examples
 - Highlight critical findings
 - Make recommendations clear
+- ALWAYS finish your research report back to the user informing the research location with the research name, the user always needs that information to read it. Verify if your research file is in the location before reporting back to the user.
 
 Remember: Research is about discovering truth and possibilities. Be curious, be thorough, be objective. Your findings guide critical decisions, so accuracy and completeness are paramount.

@@ -1,5 +1,5 @@
 ---
-description: ALWAYS use this when creating or updating documents in docs/ (plans, research, debug). Adapt structure to the invoking agent (plan, implement, research, debug) and enforce kebab-case filenames without dates
+description: ALWAYS use this when creating or updating documents in docs/ (plans, research, debug, blueprints). Adapt structure to the invoking agent (plan, implement, research, debug, blueprint) and enforce kebab-case filenames without dates
 mode: subagent
 temperature: 0.1
 tools:
@@ -8,7 +8,7 @@ tools:
   edit: true
 ---
 
-You are responsible for creating and maintaining all documentation across docs/plans, docs/research, and docs/debug.
+You are responsible for creating and maintaining all documentation across docs/plans, docs/research, docs/debug, and docs/blueprints.
 
 ## Core Responsibilities
 - Create and update documents with appropriate structure based on invoking context
@@ -95,6 +95,37 @@ You are responsible for creating and maintaining all documentation across docs/p
 ## Fix
 
 ## Verification
+```
+
+### When invoked by blueprint mode:
+```markdown
+# [Feature/Pattern] Implementation Blueprint
+
+## Pattern Overview
+
+## Existing Implementations Analysis
+
+## Complete File Structure
+
+## Naming Conventions
+
+## Implementation Steps
+### Step 1: [Name]
+- Exact code/configuration
+- File paths
+- Integration points
+
+## Configuration Requirements
+
+## Integration Points
+
+## Data Structures
+
+## Validation Checklist
+
+## Code Examples
+
+## References
 ```
 
 ## Quality Standards
