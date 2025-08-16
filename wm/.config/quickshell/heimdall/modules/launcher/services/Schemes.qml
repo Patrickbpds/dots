@@ -15,13 +15,13 @@ Searcher {
     }
 
     function selector(item: var): string {
-        return `${item.name} ${item.flavour}`;
+        return `${item.name} ${item.flavour} ${item.source || ''}`;
     }
 
     list: schemes.instances
     useFuzzy: Config.launcher.useFuzzy.schemes
-    keys: ["name", "flavour"]
-    weights: [0.9, 0.1]
+    keys: ["name", "flavour", "source"]
+    weights: [0.7, 0.2, 0.1]
 
     Variants {
         id: schemes
@@ -37,11 +37,16 @@ Searcher {
         stdout: StdioCollector {
             onStreamFinished: {
                 const schemeData = JSON.parse(text);
-                const list = Object.entries(schemeData).map(([name, f]) => Object.entries(f).map(([flavour, colours]) => ({
-                                name,
-                                flavour,
-                                colours
-                            })));
+                const list = Object.entries(schemeData).map(([name, schemeInfo]) => {
+                    // Check if schemeInfo has a flavours property (new structure)
+                    const flavoursObj = schemeInfo.flavours || schemeInfo;
+                    return Object.entries(flavoursObj).map(([flavour, colours]) => ({
+                        name,
+                        flavour,
+                        colours,
+                        source: schemeInfo.source || 'unknown'
+                    }));
+                });
 
                 const flat = [];
                 for (const s of list)
@@ -58,6 +63,7 @@ Searcher {
         readonly property string name: modelData.name
         readonly property string flavour: modelData.flavour
         readonly property var colours: modelData.colours
+        readonly property string source: modelData.source || 'unknown'
 
         function onClicked(list: AppList): void {
             list.visibilities.launcher = false;

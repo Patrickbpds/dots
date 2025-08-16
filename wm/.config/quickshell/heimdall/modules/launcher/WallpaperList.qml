@@ -47,7 +47,7 @@ PathView {
 
     implicitWidth: Math.min(numItems, count) * (Config.launcher.sizes.wallpaperWidth * 0.8 + Appearance.padding.larger * 2)
     pathItemCount: numItems
-    cacheItemCount: 4
+    cacheItemCount: 12
 
     snapMode: PathView.SnapToItem
     preferredHighlightBegin: 0.5

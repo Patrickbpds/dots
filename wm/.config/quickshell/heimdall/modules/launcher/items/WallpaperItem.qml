@@ -59,6 +59,8 @@ StyledRect {
         CachingImage {
             path: root.modelData.path
             smooth: !root.PathView.view.moving
+            asynchronous: true
+            cache: true
 
             anchors.fill: parent
         }

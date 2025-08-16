@@ -114,6 +114,14 @@ Item {
                     } else if (event.key === Qt.Key_K) {
                         list.currentList?.decrementCurrentIndex();
                         event.accepted = true;
+                    } else if (event.key === Qt.Key_N) {
+                        // Ctrl+N for next wallpaper (vim-like)
+                        list.currentList?.incrementCurrentIndex();
+                        event.accepted = true;
+                    } else if (event.key === Qt.Key_P) {
+                        // Ctrl+P for previous wallpaper (vim-like)
+                        list.currentList?.decrementCurrentIndex();
+                        event.accepted = true;
                     }
                 } else if (event.key === Qt.Key_Tab) {
                     list.currentList?.incrementCurrentIndex();

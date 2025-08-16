@@ -62,12 +62,11 @@ Item {
             }
         }
 
+        // Text content on the left
         Column {
             anchors.left: preview.right
             anchors.leftMargin: Appearance.spacing.normal
             anchors.verticalCenter: parent.verticalCenter
-
-            width: parent.width - preview.width
             spacing: 0
 
             StyledText {
@@ -80,12 +79,151 @@ Item {
             StyledText {
                 id: comment
 
-                text: root.modelData?.flavour ?? ""
+                text: {
+                    const flavour = root.modelData?.flavour ?? "";
+                    const source = root.modelData?.source ?? "";
+                    if (source && source !== "unknown") {
+                        return `${flavour} • ${source}`;
+                    }
+                    return flavour;
+                }
                 font.pointSize: Appearance.font.size.small
                 color: Colours.palette.m3outline
+            }
+        }
 
-                elide: Text.ElideRight
-                width: parent.width - Appearance.rounding.normal * 2
+        // Color palette preview - aligned to the right and vertically centered
+        Column {
+            id: colorPalette
+            spacing: 3
+            visible: root.modelData?.colours
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+
+            // First row of colors
+            Row {
+                spacing: 2
+                anchors.right: parent.right
+
+                // Primary group
+                Row {
+                    spacing: 2
+                    Repeater {
+                        model: {
+                            const colors = [];
+                            const c = root.modelData?.colours;
+                            if (c) {
+                                if (c.primary) colors.push(c.primary);
+                                if (c.secondary) colors.push(c.secondary);
+                                if (c.tertiary) colors.push(c.tertiary);
+                            }
+                            return colors;
+                        }
+                        delegate: Rectangle {
+                            width: 10
+                            height: 10
+                            radius: 5
+                            color: `#${modelData}`
+                            border.width: 1
+                            border.color: Qt.alpha(Colours.palette.m3outline, 0.2)
+                        }
+                    }
+                }
+
+                // Spacer between groups
+                Item { 
+                    width: 6
+                    height: 1
+                }
+
+                // Accent colors group 1
+                Row {
+                    spacing: 2
+                    Repeater {
+                        model: {
+                            const colors = [];
+                            const c = root.modelData?.colours;
+                            if (c) {
+                                if (c.red) colors.push(c.red);
+                                if (c.green) colors.push(c.green);
+                                if (c.blue) colors.push(c.blue);
+                                if (c.yellow) colors.push(c.yellow);
+                            }
+                            return colors;
+                        }
+                        delegate: Rectangle {
+                            width: 10
+                            height: 10
+                            radius: 5
+                            color: `#${modelData}`
+                            border.width: 1
+                            border.color: Qt.alpha(Colours.palette.m3outline, 0.2)
+                        }
+                    }
+                }
+            }
+
+            // Second row of colors
+            Row {
+                spacing: 2
+                anchors.right: parent.right
+
+                // Pastel/Light colors group
+                Row {
+                    spacing: 2
+                    Repeater {
+                        model: {
+                            const colors = [];
+                            const c = root.modelData?.colours;
+                            if (c) {
+                                if (c.pink) colors.push(c.pink);
+                                if (c.lavender) colors.push(c.lavender);
+                                if (c.peach) colors.push(c.peach);
+                                if (c.mauve) colors.push(c.mauve);
+                            }
+                            return colors;
+                        }
+                        delegate: Rectangle {
+                            width: 10
+                            height: 10
+                            radius: 5
+                            color: `#${modelData}`
+                            border.width: 1
+                            border.color: Qt.alpha(Colours.palette.m3outline, 0.2)
+                        }
+                    }
+                }
+
+                // Spacer between groups
+                Item { 
+                    width: 6
+                    height: 1
+                }
+
+                // Cool colors group
+                Row {
+                    spacing: 2
+                    Repeater {
+                        model: {
+                            const colors = [];
+                            const c = root.modelData?.colours;
+                            if (c) {
+                                if (c.teal) colors.push(c.teal);
+                                if (c.sky) colors.push(c.sky);
+                                if (c.sapphire) colors.push(c.sapphire);
+                            }
+                            return colors;
+                        }
+                        delegate: Rectangle {
+                            width: 10
+                            height: 10
+                            radius: 5
+                            color: `#${modelData}`
+                            border.width: 1
+                            border.color: Qt.alpha(Colours.palette.m3outline, 0.2)
+                        }
+                    }
+                }
             }
         }
     }
