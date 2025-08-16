@@ -16,6 +16,7 @@
 - **research**: Deep exploration and knowledge gathering → creates docs/research/[topic]-research.md
 - **debug**: Systematic issue investigation → creates docs/debug/[topic]-debug.md
 - **test**: Comprehensive testing specialist → creates meaningful unit tests with excellent coverage and best practices
+- **blueprint**: Technical templating specialist → creates docs/blueprints/[feature]-blueprint.md for extending existing patterns
 
 ### Testing Subagents
 - **test-analyzer**: Analyzes code to identify test scenarios, edge cases, and coverage opportunities
@@ -26,6 +27,7 @@
 - **test-researcher**: Researches testing best practices and patterns for specific technologies
 
 ### Broader Subagents
+- **committer**: Creates well-structured git commits following conventional commits and repository standards
 - **documenter**: Creates/updates all documentation, adapts structure to invoking context
 - **synthesizer**: Condenses inputs into structured content
 - **executor**: Carries out implementation tasks from plans
@@ -33,9 +35,14 @@
 - **researcher**: Gathers external knowledge and sources
 - **tracer**: Maintains cross-references and task linkages
 - **formatter**: Normalizes markdown structure
+- **organizer**: Reorganizes files/folders without modifying code, respects user needs or applies best practices
+
+### Quality Assurance Subagents
+- **reviewer**: Validates that all user requirements were met and tasks were completed by primary agents
+- **guardian**: Detects and resolves stuck processes, infinite loops, and hanging operations in workflows
 
 ### Document-First Workflow
 - All work happens through documents in `/docs/`
 - Documents are the source of truth (updated before user responses)
 - File naming: kebab-case without date prefixes (e.g., `feature-x-plan.md`)
-- Structure: docs/plans/, docs/research/, docs/debug/ (no deeper nesting)
+- Structure: docs/plans/, docs/research/, docs/debug/, docs/blueprints/ (no deeper nesting)
