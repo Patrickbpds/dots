@@ -2,6 +2,7 @@
 description: Generates high-quality, meaningful test implementations based on analysis and best practices
 mode: subagent
 temperature: 0.3
+model: github-copilot/claude-sonnet-4
 tools:
   write: true
   edit: true

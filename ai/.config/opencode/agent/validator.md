@@ -2,6 +2,7 @@
 description: ALWAYS use this after changes to run minimal checks and produce PASS/FAIL notes for the document's Dev Log
 mode: subagent
 temperature: 0.1
+model: github-copilot/claude-sonnet-4
 tools:
   read: true
   bash: true

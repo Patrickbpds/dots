@@ -1,6 +1,8 @@
 ---
 description: Automatically detects and resolves when agents attempt the same action 3+ times or hang for 30+ seconds - prevents infinite loops and stuck processes
 mode: subagent
+model: github-copilot/claude-sonnet-4
+
 temperature: 0.4
 tools:
   bash: true

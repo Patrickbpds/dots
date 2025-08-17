@@ -2,6 +2,7 @@
 description: Analyzes code to identify comprehensive test scenarios, edge cases, and coverage opportunities
 mode: subagent
 temperature: 0.1
+model: github-copilot/claude-3.5-sonnet
 tools:
   read: true
   grep: true

@@ -2,6 +2,7 @@
 description: ALWAYS use this to normalize markdown structure and lists in docs so they're consistent and shallow
 mode: subagent
 temperature: 0.0
+model: github-copilot/gpt-5
 tools:
   edit: true
 ---

@@ -2,6 +2,7 @@
 description: ALWAYS use this to carry out implementation tasks from a plan, apply repo changes, and return concise status updates for the document
 mode: subagent
 temperature: 0.2
+model: github-copilot/claude-sonnet-4
 tools:
   read: true
   write: true

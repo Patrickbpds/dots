@@ -2,6 +2,7 @@
 description: Analyzes test coverage, identifies gaps, and ensures meaningful coverage metrics
 mode: subagent
 temperature: 0.1
+model: github-copilot/claude-3.5-sonnet
 tools:
   read: true
   bash: true

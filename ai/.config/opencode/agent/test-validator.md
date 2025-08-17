@@ -2,6 +2,7 @@
 description: Validates test quality, ensures best practices, and prevents low-quality or placeholder tests
 mode: subagent
 temperature: 0.1
+model: github-copilot/claude-3.5-sonnet
 tools:
   read: true
   bash: true

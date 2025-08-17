@@ -2,6 +2,7 @@
 description: Researches testing best practices, patterns, and tools for specific technologies and domains
 mode: subagent
 temperature: 0.3
+model: github-copilot/claude-3.5-sonnet
 tools:
   webfetch: true
   read: true

@@ -2,6 +2,7 @@
 description: ALWAYS use this to keep tasks, acceptance criteria, and cross-references synchronized across plan, implement, and validation sections
 mode: subagent
 temperature: 0.1
+model: github-copilot/gpt-5
 tools:
   read: true
   edit: true

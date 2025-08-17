@@ -2,6 +2,7 @@
 description: Organizes files and folder structures based on user needs or best practices without modifying code content
 mode: subagent
 temperature: 0.1
+model: github-copilot/gpt-5
 tools:
   read: true
   list: true

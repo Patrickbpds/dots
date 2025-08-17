@@ -2,6 +2,7 @@
 description: ALWAYS use this when creating or updating documents in docs/ (plans, research, debug, blueprints). Adapt structure to the invoking agent (plan, implement, research, debug, blueprint) and enforce kebab-case filenames without dates
 mode: subagent
 temperature: 0.1
+model: github-copilot/claude-3.5-sonnet
 tools:
   read: true
   write: true

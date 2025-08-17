@@ -1,6 +1,8 @@
 ---
 description: NEVER use this to commit anything without explicit user approval and mentioning, agents are not allowed for asking commits.
 mode: subagent
+model: github-copilot/claude-sonnet-4
+
 temperature: 0.3
 tools:
   bash: true

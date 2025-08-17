@@ -1,6 +1,8 @@
 ---
 description: ALWAYS use this to gather and normalize external knowledge and produce structured Findings for docs/research
 mode: subagent
+model: github-copilot/gpt-5
+
 temperature: 0.2
 tools:
   webfetch: true

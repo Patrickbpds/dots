@@ -2,6 +2,8 @@
 description: Automatically validates task completion ALWAYS after ANY agent finishes - ensures code changes are applied, documents exist, and requirements are met
 mode: subagent
 temperature: 0.1
+model: github-copilot/claude-sonnet-4
+
 tools:
   read: true
   bash: true
@@ -195,7 +197,6 @@ Please complete these items and report back.
 - Research: `/docs/research/[topic]-research.md`
 - Debug: `/docs/debug/[topic]-debug.md`
 - Blueprints: `/docs/blueprints/[feature]-blueprint.md`
-- Implementation: `/docs/implementation/[feature]-implementation.md`
 
 ### Common Issues to Detect
 - Agent said it created file but file doesn't exist

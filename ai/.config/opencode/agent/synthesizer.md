@@ -2,6 +2,7 @@
 description: ALWAYS use this to condense inputs into structured content for documents (summaries, bullet points, sections)
 mode: subagent
 temperature: 0.2
+model: github-copilot/claude-3.5-sonnet
 tools:
   read: true
 ---

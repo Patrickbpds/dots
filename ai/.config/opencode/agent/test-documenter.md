@@ -2,6 +2,7 @@
 description: Creates and maintains comprehensive test documentation, test plans, and coverage reports
 mode: subagent
 temperature: 0.2
+model: github-copilot/claude-3.5-sonnet
 tools:
   write: true
   edit: true
