@@ -5,32 +5,32 @@ return {
   color_scheme = "Heimdall",
   color_schemes = {
     ["Heimdall"] = {
-      background = "#fdfcfc",
-      foreground = "#1a1919",
-      cursor_bg = "#1a1919",
-      cursor_fg = "#fdfcfc",
-      cursor_border = "#1a1919",
+      background = "#fcfcfd",
+      foreground = "#19191a",
+      cursor_bg = "#19191a",
+      cursor_fg = "#fcfcfd",
+      cursor_border = "#19191a",
       selection_bg = "#d8d8d8",
-      selection_fg = "#1a1919",
+      selection_fg = "#19191a",
       ansi = {
         "#ffffff", -- black
         "#bc1010", -- red
-        "#00cb00", -- green
-        "#cacb00", -- yellow
-        "#cb0125", -- blue
-        "#38ac20", -- magenta
-        "#344598", -- cyan
-        "#343232", -- white
+        "#468646", -- green
+        "#858646", -- yellow
+        "#465a86", -- blue
+        "#7c505d", -- magenta
+        "#607656", -- cyan
+        "#323234", -- white
       },
       brights = {
         "#d8d8d8",  -- bright black
         "#750909",  -- bright red
-        "#007e00", -- bright green
-        "#7d7e00", -- bright yellow
-        "#7e0017", -- bright blue
-        "#236b14", -- bright magenta
-        "#202b5f", -- bright cyan
-        "#0d0c0c", -- bright white
+        "#2b532b", -- bright green
+        "#53532b", -- bright yellow
+        "#2b3853", -- bright blue
+        "#4d323a", -- bright magenta
+        "#3b4935", -- bright cyan
+        "#0c0c0d", -- bright white
       },
     },
   },
