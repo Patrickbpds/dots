@@ -1,0 +1,4592 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Heimdall Configuration Schema",
+  "description": "Configuration schema for Heimdall quickshell",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Configuration version"
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "modules": {
+      "type": "object",
+      "properties": {
+        "appearance": {
+          "type": "object",
+          "description": "Configuration for appearance module",
+          "properties": {
+            "rounding": {
+              "type": "string",
+              "default": "Rounding {}"
+            },
+            "spacing": {
+              "type": "string",
+              "default": "Spacing {}"
+            },
+            "padding": {
+              "type": "string",
+              "default": "Padding {}"
+            },
+            "font": {
+              "type": "string",
+              "default": "FontStuff {}"
+            },
+            "anim": {
+              "type": "string",
+              "default": "Anim {}"
+            },
+            "transparency": {
+              "type": "string",
+              "default": "Transparency {}"
+            },
+            "scale": {
+              "type": "number",
+              "default": 1.0
+            },
+            "small": {
+              "type": "integer"
+            },
+            "normal": {
+              "type": "integer"
+            },
+            "large": {
+              "type": "integer"
+            },
+            "full": {
+              "type": "integer"
+            },
+            "smaller": {
+              "type": "integer"
+            },
+            "larger": {
+              "type": "integer"
+            },
+            "sans": {
+              "type": "string",
+              "default": "IBM Plex Sans"
+            },
+            "mono": {
+              "type": "string",
+              "default": "JetBrains Mono NF"
+            },
+            "material": {
+              "type": "string",
+              "default": "Material Symbols Rounded"
+            },
+            "extraLarge": {
+              "type": "integer"
+            },
+            "family": {
+              "type": "string",
+              "default": "FontFamily {}"
+            },
+            "size": {
+              "type": "string",
+              "default": "FontSize {}"
+            },
+            "expressiveFastSpatial": {
+              "type": "integer"
+            },
+            "expressiveDefaultSpatial": {
+              "type": "integer"
+            },
+            "expressiveEffects": {
+              "type": "integer"
+            },
+            "curves": {
+              "type": "string",
+              "default": "AnimCurves {}"
+            },
+            "durations": {
+              "type": "string",
+              "default": "AnimDurations {}",
+              "minimum": 0,
+              "maximum": 10000
+            },
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "base": {
+              "type": "number",
+              "default": 0.85
+            },
+            "layers": {
+              "type": "number",
+              "default": 0.4
+            }
+          }
+        },
+        "general": {
+          "type": "object",
+          "description": "Configuration for general module",
+          "properties": {
+            "apps": {
+              "type": "string",
+              "default": "Apps {}"
+            }
+          }
+        },
+        "background": {
+          "type": "object",
+          "description": "Configuration for background module",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "desktopClock": {
+              "type": "string",
+              "default": "DesktopClock {}"
+            }
+          }
+        },
+        "bar": {
+          "type": "object",
+          "description": "Configuration for bar module",
+          "properties": {
+            "persistent": {
+              "type": "boolean",
+              "default": true
+            },
+            "showOnHover": {
+              "type": "boolean",
+              "default": true
+            },
+            "dragThreshold": {
+              "type": "integer",
+              "default": 20
+            },
+            "workspaces": {
+              "type": "string",
+              "default": "Workspaces {}"
+            },
+            "status": {
+              "type": "string",
+              "default": "Status {}"
+            },
+            "sizes": {
+              "type": "string",
+              "default": "Sizes {}"
+            },
+            "shown": {
+              "type": "integer",
+              "default": 5
+            },
+            "rounded": {
+              "type": "boolean",
+              "default": true
+            },
+            "activeIndicator": {
+              "type": "boolean",
+              "default": true
+            },
+            "occupiedBg": {
+              "type": "boolean",
+              "default": false
+            },
+            "showWindows": {
+              "type": "boolean",
+              "default": true
+            },
+            "activeTrail": {
+              "type": "boolean",
+              "default": false
+            },
+            "label": {
+              "type": "string",
+              "default": "\uf444  "
+            },
+            "occupiedLabel": {
+              "type": "string",
+              "default": "\udb82\udfaf "
+            },
+            "activeLabel": {
+              "type": "string",
+              "default": "\udb82\udfaf "
+            },
+            "showAudio": {
+              "type": "boolean",
+              "default": false
+            },
+            "showKbLayout": {
+              "type": "boolean",
+              "default": false
+            },
+            "showNetwork": {
+              "type": "boolean",
+              "default": true
+            },
+            "showBluetooth": {
+              "type": "boolean",
+              "default": true
+            },
+            "showBattery": {
+              "type": "boolean",
+              "default": true
+            },
+            "innerHeight": {
+              "type": "integer",
+              "default": 30
+            },
+            "windowPreviewSize": {
+              "type": "integer",
+              "default": 400
+            },
+            "trayMenuWidth": {
+              "type": "integer",
+              "default": 300
+            },
+            "batteryWidth": {
+              "type": "integer",
+              "default": 250
+            },
+            "networkWidth": {
+              "type": "integer",
+              "default": 320
+            }
+          }
+        },
+        "border": {
+          "type": "object",
+          "description": "Configuration for border module",
+          "properties": {
+            "thickness": {
+              "type": "integer"
+            },
+            "rounding": {
+              "type": "integer"
+            }
+          }
+        },
+        "dashboard": {
+          "type": "object",
+          "description": "Configuration for dashboard module",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "showOnHover": {
+              "type": "boolean",
+              "default": true
+            },
+            "mediaUpdateInterval": {
+              "type": "integer",
+              "default": 500
+            },
+            "visualiserBars": {
+              "type": "integer",
+              "default": 45
+            },
+            "dragThreshold": {
+              "type": "integer",
+              "default": 50
+            },
+            "sizes": {
+              "type": "string",
+              "default": "Sizes {}"
+            },
+            "tabIndicatorHeight": {
+              "type": "integer",
+              "default": 3
+            },
+            "tabIndicatorSpacing": {
+              "type": "integer",
+              "default": 5
+            },
+            "infoWidth": {
+              "type": "integer",
+              "default": 200
+            },
+            "infoIconSize": {
+              "type": "integer",
+              "default": 25
+            },
+            "dateTimeWidth": {
+              "type": "integer",
+              "default": 110
+            },
+            "mediaWidth": {
+              "type": "integer",
+              "default": 200
+            },
+            "mediaProgressSweep": {
+              "type": "integer",
+              "default": 180
+            },
+            "mediaProgressThickness": {
+              "type": "integer",
+              "default": 8
+            },
+            "resourceProgessThickness": {
+              "type": "integer",
+              "default": 10
+            },
+            "weatherWidth": {
+              "type": "integer",
+              "default": 250
+            },
+            "mediaCoverArtSize": {
+              "type": "integer",
+              "default": 150
+            },
+            "mediaVisualiserSize": {
+              "type": "integer",
+              "default": 80
+            },
+            "resourceSize": {
+              "type": "integer",
+              "default": 200
+            }
+          }
+        },
+        "controlCenter": {
+          "type": "object",
+          "description": "Configuration for controlCenter module",
+          "properties": {
+            "sizes": {
+              "type": "string",
+              "default": "Sizes {}"
+            },
+            "heightMult": {
+              "type": "number",
+              "default": 0.7
+            },
+            "ratio": {
+              "type": "number",
+              "default": 16.0
+            }
+          }
+        },
+        "launcher": {
+          "type": "object",
+          "description": "Configuration for launcher module",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "maxShown": {
+              "type": "integer",
+              "default": 8
+            },
+            "maxWallpapers": {
+              "type": "integer",
+              "default": 9
+            },
+            "actionPrefix": {
+              "type": "string",
+              "default": ">"
+            },
+            "enableDangerousActions": {
+              "type": "boolean",
+              "default": false
+            },
+            "dragThreshold": {
+              "type": "integer",
+              "default": 50
+            },
+            "vimKeybinds": {
+              "type": "boolean",
+              "default": true
+            },
+            "useFuzzy": {
+              "type": "string",
+              "default": "UseFuzzy {}"
+            },
+            "sizes": {
+              "type": "string",
+              "default": "Sizes {}"
+            },
+            "apps": {
+              "type": "boolean",
+              "default": false
+            },
+            "actions": {
+              "type": "boolean",
+              "default": false
+            },
+            "schemes": {
+              "type": "boolean",
+              "default": false
+            },
+            "variants": {
+              "type": "boolean",
+              "default": false
+            },
+            "wallpapers": {
+              "type": "boolean",
+              "default": false
+            },
+            "itemWidth": {
+              "type": "integer",
+              "default": 600
+            },
+            "itemHeight": {
+              "type": "integer",
+              "default": 57
+            },
+            "wallpaperWidth": {
+              "type": "integer",
+              "default": 280
+            },
+            "wallpaperHeight": {
+              "type": "integer",
+              "default": 200
+            }
+          }
+        },
+        "notifications": {
+          "type": "object",
+          "description": "Configuration for notifications module",
+          "properties": {
+            "expire": {
+              "type": "boolean",
+              "default": true
+            },
+            "defaultExpireTimeout": {
+              "type": "integer",
+              "default": 5000
+            },
+            "clearThreshold": {
+              "type": "number",
+              "default": 0.3
+            },
+            "expandThreshold": {
+              "type": "integer",
+              "default": 20
+            },
+            "actionOnClick": {
+              "type": "boolean",
+              "default": false
+            },
+            "sizes": {
+              "type": "string",
+              "default": "Sizes {}"
+            },
+            "width": {
+              "type": "integer",
+              "default": 400
+            },
+            "image": {
+              "type": "integer",
+              "default": 41
+            },
+            "badge": {
+              "type": "integer",
+              "default": 20
+            }
+          }
+        },
+        "osd": {
+          "type": "object",
+          "description": "Configuration for osd module",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "hideDelay": {
+              "type": "integer",
+              "default": 2000
+            },
+            "sizes": {
+              "type": "string",
+              "default": "Sizes {}"
+            },
+            "sliderWidth": {
+              "type": "integer",
+              "default": 30
+            },
+            "sliderHeight": {
+              "type": "integer",
+              "default": 150
+            }
+          }
+        },
+        "session": {
+          "type": "object",
+          "description": "Configuration for session module",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "dragThreshold": {
+              "type": "integer",
+              "default": 30
+            },
+            "vimKeybinds": {
+              "type": "boolean",
+              "default": true
+            },
+            "commands": {
+              "type": "string",
+              "default": "Commands {}"
+            },
+            "sizes": {
+              "type": "string",
+              "default": "Sizes {}"
+            },
+            "button": {
+              "type": "integer",
+              "default": 80
+            }
+          }
+        },
+        "lock": {
+          "type": "object",
+          "description": "Configuration for lock module",
+          "properties": {
+            "maxNotifs": {
+              "type": "integer",
+              "default": 5
+            },
+            "sizes": {
+              "type": "string",
+              "default": "Sizes {}"
+            },
+            "border": {
+              "type": "integer",
+              "default": 100
+            },
+            "clockWidth": {
+              "type": "integer",
+              "default": 800
+            },
+            "clockHeight": {
+              "type": "integer",
+              "default": 200
+            },
+            "inputWidth": {
+              "type": "integer",
+              "default": 600
+            },
+            "inputHeight": {
+              "type": "integer",
+              "default": 200
+            },
+            "faceSize": {
+              "type": "integer",
+              "default": 100
+            },
+            "weatherWidth": {
+              "type": "integer",
+              "default": 400
+            },
+            "weatherHeight": {
+              "type": "integer",
+              "default": 100
+            },
+            "mediaWidth": {
+              "type": "integer",
+              "default": 600
+            },
+            "mediaWidthSmall": {
+              "type": "integer",
+              "default": 450
+            },
+            "mediaHeight": {
+              "type": "integer",
+              "default": 170
+            },
+            "mediaHeightSmall": {
+              "type": "integer",
+              "default": 150
+            },
+            "mediaCoverSize": {
+              "type": "integer",
+              "default": 150
+            },
+            "mediaCoverSizeSmall": {
+              "type": "integer",
+              "default": 120
+            },
+            "mediaCoverBorder": {
+              "type": "integer",
+              "default": 3
+            },
+            "largeScreenWidth": {
+              "type": "integer",
+              "default": 2560
+            },
+            "smallScreenWidth": {
+              "type": "integer",
+              "default": 1080
+            },
+            "buttonsWidth": {
+              "type": "integer",
+              "default": 400
+            },
+            "buttonsWidthSmall": {
+              "type": "integer",
+              "default": 300
+            }
+          }
+        },
+        "uiComponents": {
+          "type": "object",
+          "description": "Configuration for uiComponents module",
+          "properties": {
+            "switch_": {
+              "type": "object",
+              "properties": {
+                "widthRatio": {
+                  "type": "number",
+                  "default": 1.7,
+                  "description": "Width to height ratio"
+                },
+                "thumbWidthRatio": {
+                  "type": "number",
+                  "default": 1.3,
+                  "description": "Thumb width ratio when pressed"
+                },
+                "iconStartX": {
+                  "type": "number",
+                  "default": 0.15,
+                  "description": "Icon start X position ratio"
+                },
+                "iconEndX": {
+                  "type": "number",
+                  "default": 0.85,
+                  "description": "Icon end X position ratio"
+                },
+                "strokeWidth": {
+                  "type": "integer",
+                  "default": 2,
+                  "description": "Icon stroke width"
+                }
+              }
+            },
+            "slider": {
+              "type": "object",
+              "properties": {
+                "handleSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "description": "Slider handle size"
+                },
+                "trackHeight": {
+                  "type": "integer",
+                  "default": 4,
+                  "description": "Slider track height"
+                },
+                "handleScale": {
+                  "type": "number",
+                  "default": 1.2,
+                  "description": "Handle scale when pressed"
+                }
+              }
+            },
+            "scrollBar": {
+              "type": "object",
+              "properties": {
+                "width": {
+                  "type": "integer",
+                  "default": 8,
+                  "description": "ScrollBar width"
+                },
+                "minHeight": {
+                  "type": "integer",
+                  "default": 20,
+                  "description": "Minimum thumb height"
+                },
+                "hoverScale": {
+                  "type": "number",
+                  "default": 1.5,
+                  "description": "Scale factor on hover"
+                },
+                "margin": {
+                  "type": "integer",
+                  "default": 2,
+                  "description": "Margin from edge"
+                }
+              }
+            },
+            "busyIndicator": {
+              "type": "object",
+              "properties": {
+                "defaultSize": {
+                  "type": "integer",
+                  "default": 48,
+                  "description": "Default size"
+                },
+                "strokeWidth": {
+                  "type": "integer",
+                  "default": 4,
+                  "description": "Stroke width"
+                },
+                "rotationDuration": {
+                  "type": "integer",
+                  "default": 1000,
+                  "description": "Full rotation duration in ms"
+                }
+              }
+            },
+            "radioButton": {
+              "type": "object",
+              "properties": {
+                "indicatorSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "description": "Indicator size"
+                },
+                "innerCircleRatio": {
+                  "type": "integer",
+                  "description": "Inner circle size ratio"
+                },
+                "rippleSize": {
+                  "type": "integer",
+                  "default": 40,
+                  "description": "Ripple effect size"
+                }
+              }
+            },
+            "spinBox": {
+              "type": "object",
+              "properties": {
+                "buttonWidth": {
+                  "type": "integer",
+                  "default": 32,
+                  "description": "Up/down button width"
+                },
+                "stepSize": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "Default step size"
+                },
+                "accelerationDelay": {
+                  "type": "integer",
+                  "default": 300,
+                  "description": "Delay before acceleration"
+                }
+              }
+            },
+            "textField": {
+              "type": "object",
+              "properties": {
+                "cursorWidth": {
+                  "type": "integer",
+                  "default": 2,
+                  "description": "Cursor width"
+                },
+                "cursorBlinkRate": {
+                  "type": "integer",
+                  "default": 500,
+                  "description": "Cursor blink rate in ms"
+                },
+                "selectionHandleSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "description": "Touch selection handle size"
+                }
+              }
+            },
+            "toolTip": {
+              "type": "object",
+              "properties": {
+                "delay": {
+                  "type": "integer",
+                  "default": 500,
+                  "description": "Show delay in ms"
+                },
+                "timeout": {
+                  "type": "integer",
+                  "default": 5000,
+                  "description": "Auto-hide timeout in ms"
+                },
+                "maxWidth": {
+                  "type": "integer",
+                  "default": 300,
+                  "description": "Maximum width"
+                },
+                "offset": {
+                  "type": "integer",
+                  "default": 8,
+                  "description": "Offset from cursor"
+                }
+              }
+            },
+            "dialog": {
+              "type": "object",
+              "properties": {
+                "minWidth": {
+                  "type": "integer",
+                  "default": 300,
+                  "description": "Minimum dialog width"
+                },
+                "minHeight": {
+                  "type": "integer",
+                  "default": 200,
+                  "description": "Minimum dialog height"
+                },
+                "buttonSpacing": {
+                  "type": "integer",
+                  "default": 8,
+                  "description": "Button spacing"
+                },
+                "contentMargin": {
+                  "type": "integer",
+                  "default": 24,
+                  "description": "Content margin"
+                }
+              }
+            },
+            "list": {
+              "type": "object",
+              "properties": {
+                "itemHeight": {
+                  "type": "integer",
+                  "default": 48,
+                  "description": "Default item height"
+                },
+                "itemSpacing": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Item spacing"
+                },
+                "sectionHeight": {
+                  "type": "integer",
+                  "default": 32,
+                  "description": "Section header height"
+                },
+                "alternatingRows": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Alternating row colors"
+                }
+              }
+            },
+            "grid": {
+              "type": "object",
+              "properties": {
+                "cellWidth": {
+                  "type": "integer",
+                  "default": 100,
+                  "description": "Default cell width"
+                },
+                "cellHeight": {
+                  "type": "integer",
+                  "default": 100,
+                  "description": "Default cell height"
+                },
+                "spacing": {
+                  "type": "integer",
+                  "default": 8,
+                  "description": "Grid spacing"
+                },
+                "columns": {
+                  "type": "integer",
+                  "default": 4,
+                  "description": "Default column count"
+                }
+              }
+            },
+            "tab": {
+              "type": "object",
+              "properties": {
+                "height": {
+                  "type": "integer",
+                  "default": 48,
+                  "description": "Tab height"
+                },
+                "minWidth": {
+                  "type": "integer",
+                  "default": 90,
+                  "description": "Minimum tab width"
+                },
+                "maxWidth": {
+                  "type": "integer",
+                  "default": 360,
+                  "description": "Maximum tab width"
+                },
+                "indicatorHeight": {
+                  "type": "integer",
+                  "default": 3,
+                  "description": "Selected indicator height"
+                }
+              }
+            },
+            "menu": {
+              "type": "object",
+              "properties": {
+                "itemHeight": {
+                  "type": "integer",
+                  "default": 36,
+                  "description": "Menu item height"
+                },
+                "minWidth": {
+                  "type": "integer",
+                  "default": 200,
+                  "description": "Minimum menu width"
+                },
+                "maxWidth": {
+                  "type": "integer",
+                  "default": 400,
+                  "description": "Maximum menu width"
+                },
+                "submenuDelay": {
+                  "type": "integer",
+                  "default": 300,
+                  "description": "Submenu show delay"
+                },
+                "iconSize": {
+                  "type": "integer",
+                  "default": 20,
+                  "description": "Menu icon size"
+                },
+                "separatorHeight": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "Separator height"
+                }
+              }
+            },
+            "progress": {
+              "type": "object",
+              "properties": {
+                "barHeight": {
+                  "type": "integer",
+                  "default": 4,
+                  "description": "Progress bar height"
+                },
+                "circularSize": {
+                  "type": "integer",
+                  "default": 48,
+                  "description": "Circular progress size"
+                },
+                "strokeWidth": {
+                  "type": "integer",
+                  "default": 4,
+                  "description": "Circular stroke width"
+                },
+                "indeterminate": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Indeterminate mode"
+                }
+              }
+            },
+            "badge": {
+              "type": "object",
+              "properties": {
+                "size": {
+                  "type": "integer",
+                  "default": 20,
+                  "description": "Badge size"
+                },
+                "fontSize": {
+                  "type": "integer",
+                  "default": 12,
+                  "description": "Badge font size"
+                },
+                "maxCount": {
+                  "type": "integer",
+                  "default": 99,
+                  "description": "Maximum count to display"
+                },
+                "overflowText": {
+                  "type": "string",
+                  "default": "99+",
+                  "description": "Text for overflow"
+                }
+              }
+            },
+            "chip": {
+              "type": "object",
+              "properties": {
+                "height": {
+                  "type": "integer",
+                  "default": 32,
+                  "description": "Chip height"
+                },
+                "iconSize": {
+                  "type": "integer",
+                  "default": 18,
+                  "description": "Chip icon size"
+                },
+                "deleteIconSize": {
+                  "type": "integer",
+                  "default": 18,
+                  "description": "Delete icon size"
+                },
+                "spacing": {
+                  "type": "integer",
+                  "default": 8,
+                  "description": "Internal spacing"
+                }
+              }
+            },
+            "avatar": {
+              "type": "object",
+              "properties": {
+                "smallSize": {
+                  "type": "integer",
+                  "default": 32,
+                  "description": "Small avatar size"
+                },
+                "mediumSize": {
+                  "type": "integer",
+                  "default": 48,
+                  "description": "Medium avatar size"
+                },
+                "largeSize": {
+                  "type": "integer",
+                  "default": 64,
+                  "description": "Large avatar size"
+                },
+                "borderWidth": {
+                  "type": "integer",
+                  "default": 2,
+                  "description": "Border width"
+                }
+              }
+            },
+            "divider": {
+              "type": "object",
+              "properties": {
+                "thickness": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "Divider thickness"
+                },
+                "margin": {
+                  "type": "integer",
+                  "default": 8,
+                  "description": "Margin around divider"
+                },
+                "opacity": {
+                  "type": "number",
+                  "default": 0.12,
+                  "description": "Divider opacity"
+                }
+              }
+            },
+            "fab": {
+              "type": "object",
+              "properties": {
+                "size": {
+                  "type": "integer",
+                  "default": 56,
+                  "description": "FAB size"
+                },
+                "miniSize": {
+                  "type": "integer",
+                  "default": 40,
+                  "description": "Mini FAB size"
+                },
+                "iconSize": {
+                  "type": "integer",
+                  "default": 24,
+                  "description": "Icon size"
+                },
+                "extendedPadding": {
+                  "type": "integer",
+                  "default": 16,
+                  "description": "Extended FAB padding"
+                }
+              }
+            },
+            "widthRatio": {
+              "type": "number",
+              "default": 1.7
+            },
+            "thumbWidthRatio": {
+              "type": "number",
+              "default": 1.3
+            },
+            "iconStartX": {
+              "type": "number",
+              "default": 0.15
+            },
+            "iconEndX": {
+              "type": "number",
+              "default": 0.85
+            },
+            "strokeWidth": {
+              "type": "integer",
+              "default": 2
+            },
+            "handleSize": {
+              "type": "integer",
+              "default": 20
+            },
+            "trackHeight": {
+              "type": "integer",
+              "default": 4
+            },
+            "handleScale": {
+              "type": "number",
+              "default": 1.2
+            },
+            "width": {
+              "type": "integer",
+              "default": 8
+            },
+            "minHeight": {
+              "type": "integer",
+              "default": 20
+            },
+            "hoverScale": {
+              "type": "number",
+              "default": 1.5
+            },
+            "margin": {
+              "type": "integer",
+              "default": 2
+            },
+            "defaultSize": {
+              "type": "integer",
+              "default": 48
+            },
+            "rotationDuration": {
+              "type": "integer",
+              "default": 1000
+            },
+            "indicatorSize": {
+              "type": "integer",
+              "default": 20
+            },
+            "innerCircleRatio": {
+              "type": "integer"
+            },
+            "rippleSize": {
+              "type": "integer",
+              "default": 40
+            },
+            "buttonWidth": {
+              "type": "integer",
+              "default": 32
+            },
+            "stepSize": {
+              "type": "integer",
+              "default": 1
+            },
+            "accelerationDelay": {
+              "type": "integer",
+              "default": 300
+            },
+            "cursorWidth": {
+              "type": "integer",
+              "default": 2
+            },
+            "cursorBlinkRate": {
+              "type": "integer",
+              "default": 500
+            },
+            "selectionHandleSize": {
+              "type": "integer",
+              "default": 20
+            },
+            "delay": {
+              "type": "integer",
+              "default": 500
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 5000
+            },
+            "maxWidth": {
+              "type": "integer",
+              "default": 300
+            },
+            "offset": {
+              "type": "integer",
+              "default": 8
+            },
+            "minWidth": {
+              "type": "integer",
+              "default": 300
+            },
+            "buttonSpacing": {
+              "type": "integer",
+              "default": 8
+            },
+            "contentMargin": {
+              "type": "integer",
+              "default": 24
+            },
+            "itemHeight": {
+              "type": "integer",
+              "default": 48
+            },
+            "itemSpacing": {
+              "type": "integer",
+              "default": 0
+            },
+            "sectionHeight": {
+              "type": "integer",
+              "default": 32
+            },
+            "alternatingRows": {
+              "type": "boolean",
+              "default": false
+            },
+            "cellWidth": {
+              "type": "integer",
+              "default": 100
+            },
+            "cellHeight": {
+              "type": "integer",
+              "default": 100
+            },
+            "spacing": {
+              "type": "integer",
+              "default": 8
+            },
+            "columns": {
+              "type": "integer",
+              "default": 4
+            },
+            "height": {
+              "type": "integer",
+              "default": 48
+            },
+            "indicatorHeight": {
+              "type": "integer",
+              "default": 3
+            },
+            "submenuDelay": {
+              "type": "integer",
+              "default": 300
+            },
+            "iconSize": {
+              "type": "integer",
+              "default": 20
+            },
+            "separatorHeight": {
+              "type": "integer",
+              "default": 1
+            },
+            "barHeight": {
+              "type": "integer",
+              "default": 4
+            },
+            "circularSize": {
+              "type": "integer",
+              "default": 48
+            },
+            "indeterminate": {
+              "type": "boolean",
+              "default": false
+            },
+            "size": {
+              "type": "integer",
+              "default": 20
+            },
+            "fontSize": {
+              "type": "integer",
+              "default": 12
+            },
+            "maxCount": {
+              "type": "integer",
+              "default": 99
+            },
+            "overflowText": {
+              "type": "string",
+              "default": "99+"
+            },
+            "deleteIconSize": {
+              "type": "integer",
+              "default": 18
+            },
+            "smallSize": {
+              "type": "integer",
+              "default": 32
+            },
+            "mediumSize": {
+              "type": "integer",
+              "default": 48
+            },
+            "largeSize": {
+              "type": "integer",
+              "default": 64
+            },
+            "borderWidth": {
+              "type": "integer",
+              "default": 2
+            },
+            "thickness": {
+              "type": "integer",
+              "default": 1
+            },
+            "opacity": {
+              "type": "number",
+              "default": 0.12
+            },
+            "miniSize": {
+              "type": "integer",
+              "default": 40
+            },
+            "extendedPadding": {
+              "type": "integer",
+              "default": 16
+            }
+          }
+        },
+        "animation": {
+          "type": "object",
+          "description": "Configuration for animation module",
+          "properties": {
+            "durations": {
+              "type": "object",
+              "properties": {
+                "instant": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "fast": {
+                  "type": "integer",
+                  "default": 150
+                },
+                "normal": {
+                  "type": "integer",
+                  "default": 300
+                },
+                "slow": {
+                  "type": "integer",
+                  "default": 500
+                },
+                "verySlow": {
+                  "type": "integer",
+                  "default": 800
+                },
+                "expressiveDefaultSpatial": {
+                  "type": "integer",
+                  "default": 400
+                },
+                "expressiveDefaultNonSpatial": {
+                  "type": "integer",
+                  "default": 300,
+                  "description": "Component-specific durations"
+                },
+                "fadeIn": {
+                  "type": "integer",
+                  "default": 200
+                },
+                "fadeOut": {
+                  "type": "integer",
+                  "default": 150
+                },
+                "slideIn": {
+                  "type": "integer",
+                  "default": 300
+                },
+                "slideOut": {
+                  "type": "integer",
+                  "default": 250
+                },
+                "expand": {
+                  "type": "integer",
+                  "default": 350
+                },
+                "collapse": {
+                  "type": "integer",
+                  "default": 300
+                },
+                "ripple": {
+                  "type": "integer",
+                  "default": 600
+                },
+                "hover": {
+                  "type": "integer",
+                  "default": 150
+                },
+                "focus": {
+                  "type": "integer",
+                  "default": 200
+                }
+              }
+            },
+            "curves": {
+              "type": "object",
+              "properties": {
+                "emphasized": {
+                  "type": "object",
+                  "default": "[0.2, 0.0, 0.0, 1.0]"
+                },
+                "emphasizedDecelerate": {
+                  "type": "object",
+                  "default": "[0.05, 0.7, 0.1, 1.0]"
+                },
+                "emphasizedAccelerate": {
+                  "type": "object",
+                  "default": "[0.3, 0.0, 0.8, 0.15]"
+                },
+                "standard": {
+                  "type": "object",
+                  "default": "[0.2, 0.0, 0.0, 1.0]"
+                },
+                "standardDecelerate": {
+                  "type": "object",
+                  "default": "[0.0, 0.0, 0.0, 1.0]"
+                },
+                "standardAccelerate": {
+                  "type": "object",
+                  "default": "[0.3, 0.0, 1.0, 1.0]"
+                },
+                "expressiveDefaultSpatial": {
+                  "type": "object",
+                  "default": "[0.2, 0.0, 0.0, 1.0]"
+                },
+                "expressiveDefaultNonSpatial": {
+                  "type": "object",
+                  "default": "[0.2, 0.0, 0.0, 1.0]",
+                  "description": "Additional easing options"
+                },
+                "linear": {
+                  "type": "integer"
+                },
+                "inQuad": {
+                  "type": "integer"
+                },
+                "outQuad": {
+                  "type": "integer"
+                },
+                "inOutQuad": {
+                  "type": "integer"
+                },
+                "inCubic": {
+                  "type": "integer"
+                },
+                "outCubic": {
+                  "type": "integer"
+                },
+                "inOutCubic": {
+                  "type": "integer"
+                },
+                "inQuart": {
+                  "type": "integer"
+                },
+                "outQuart": {
+                  "type": "integer"
+                },
+                "inOutQuart": {
+                  "type": "integer"
+                },
+                "inQuint": {
+                  "type": "integer"
+                },
+                "outQuint": {
+                  "type": "integer"
+                },
+                "inOutQuint": {
+                  "type": "integer"
+                },
+                "inExpo": {
+                  "type": "integer"
+                },
+                "outExpo": {
+                  "type": "integer"
+                },
+                "inOutExpo": {
+                  "type": "integer"
+                },
+                "inCirc": {
+                  "type": "integer"
+                },
+                "outCirc": {
+                  "type": "integer"
+                },
+                "inOutCirc": {
+                  "type": "integer"
+                },
+                "inElastic": {
+                  "type": "integer"
+                },
+                "outElastic": {
+                  "type": "integer"
+                },
+                "inOutElastic": {
+                  "type": "integer"
+                },
+                "inBack": {
+                  "type": "integer"
+                },
+                "outBack": {
+                  "type": "integer"
+                },
+                "inOutBack": {
+                  "type": "integer"
+                },
+                "inBounce": {
+                  "type": "integer"
+                },
+                "outBounce": {
+                  "type": "integer"
+                },
+                "inOutBounce": {
+                  "type": "integer"
+                }
+              }
+            },
+            "transitions": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "string",
+                  "default": "QtObject {"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "slide",
+                  "description": "\"slide\", \"fade\", \"scale\", \"flip\", \"none\""
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 300
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.emphasized"
+                },
+                "direction": {
+                  "type": "string",
+                  "default": "horizontal",
+                  "description": "\"horizontal\", \"vertical\""
+                }
+              }
+            },
+            "modal": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "fade-scale",
+                  "description": "\"fade\", \"scale\", \"fade-scale\", \"slide-up\", \"none\""
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 250
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.emphasizedDecelerate"
+                },
+                "scaleFrom": {
+                  "type": "number",
+                  "default": 0.9
+                },
+                "scaleTo": {
+                  "type": "number",
+                  "default": 1.0
+                }
+              }
+            },
+            "listItem": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "fade-slide",
+                  "description": "\"fade\", \"slide\", \"fade-slide\", \"none\""
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 200
+                },
+                "stagger": {
+                  "type": "integer",
+                  "default": 50,
+                  "description": "Delay between items"
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.standardDecelerate"
+                }
+              }
+            },
+            "tab": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "slide",
+                  "description": "\"slide\", \"fade\", \"none\""
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 300
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.standard"
+                }
+              }
+            },
+            "tooltip": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "fade",
+                  "description": "\"fade\", \"scale\", \"fade-scale\", \"none\""
+                },
+                "fadeInDuration": {
+                  "type": "integer",
+                  "default": 150
+                },
+                "fadeOutDuration": {
+                  "type": "integer",
+                  "default": 75
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.standardDecelerate"
+                }
+              }
+            },
+            "menu": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "fade-scale",
+                  "description": "\"fade\", \"scale\", \"fade-scale\", \"slide\", \"none\""
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 200
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.emphasizedDecelerate"
+                },
+                "scaleOrigin": {
+                  "type": "number",
+                  "default": 0.95
+                }
+              }
+            },
+            "spring": {
+              "type": "object",
+              "properties": {
+                "damping": {
+                  "type": "number",
+                  "default": 0.8
+                },
+                "mass": {
+                  "type": "number",
+                  "default": 1.0
+                },
+                "stiffness": {
+                  "type": "number",
+                  "default": 100.0
+                },
+                "velocity": {
+                  "type": "number",
+                  "default": 0.0
+                },
+                "epsilon": {
+                  "type": "number",
+                  "default": 0.01
+                },
+                "modulus": {
+                  "type": "integer",
+                  "default": 0
+                }
+              }
+            },
+            "parallax": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "factor": {
+                  "type": "number",
+                  "default": 0.5,
+                  "description": "Parallax movement factor"
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 300
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.standard"
+                }
+              }
+            },
+            "ripple": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 600
+                },
+                "maxRadius": {
+                  "type": "number",
+                  "default": 100.0
+                },
+                "opacity": {
+                  "type": "number",
+                  "default": 0.12
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.standardDecelerate"
+                }
+              }
+            },
+            "hover": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 150
+                },
+                "scale": {
+                  "type": "number",
+                  "default": 1.05
+                },
+                "opacity": {
+                  "type": "number",
+                  "default": 0.08
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.standard"
+                }
+              }
+            },
+            "focus": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 200
+                },
+                "glowRadius": {
+                  "type": "integer",
+                  "default": 4
+                },
+                "glowOpacity": {
+                  "type": "number",
+                  "default": 0.12
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.emphasizedDecelerate"
+                }
+              }
+            },
+            "scroll": {
+              "type": "object",
+              "properties": {
+                "smoothScrolling": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 250
+                },
+                "easing": {
+                  "type": "object",
+                  "default": "curves.standardDecelerate"
+                },
+                "bounceEffect": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "bounceDamping": {
+                  "type": "number",
+                  "default": 0.5
+                }
+              }
+            },
+            "loading": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "spinner",
+                  "description": "\"spinner\", \"dots\", \"pulse\", \"skeleton\""
+                },
+                "duration": {
+                  "type": "integer",
+                  "default": 1000
+                },
+                "dotCount": {
+                  "type": "integer",
+                  "default": 3
+                },
+                "dotDelay": {
+                  "type": "integer",
+                  "default": 200
+                }
+              }
+            },
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "speedMultiplier": {
+              "type": "number",
+              "default": 1.0
+            },
+            "instant": {
+              "type": "integer",
+              "default": 0
+            },
+            "fast": {
+              "type": "integer",
+              "default": 150
+            },
+            "normal": {
+              "type": "integer",
+              "default": 300
+            },
+            "slow": {
+              "type": "integer",
+              "default": 500
+            },
+            "verySlow": {
+              "type": "integer",
+              "default": 800
+            },
+            "expressiveDefaultSpatial": {
+              "type": "integer",
+              "default": 400
+            },
+            "expressiveDefaultNonSpatial": {
+              "type": "integer",
+              "default": 300
+            },
+            "fadeIn": {
+              "type": "integer",
+              "default": 200
+            },
+            "fadeOut": {
+              "type": "integer",
+              "default": 150
+            },
+            "slideIn": {
+              "type": "integer",
+              "default": 300
+            },
+            "slideOut": {
+              "type": "integer",
+              "default": 250
+            },
+            "expand": {
+              "type": "integer",
+              "default": 350
+            },
+            "collapse": {
+              "type": "integer",
+              "default": 300
+            },
+            "emphasized": {
+              "type": "object",
+              "default": "[0.2, 0.0, 0.0, 1.0]"
+            },
+            "emphasizedDecelerate": {
+              "type": "object",
+              "default": "[0.05, 0.7, 0.1, 1.0]"
+            },
+            "emphasizedAccelerate": {
+              "type": "object",
+              "default": "[0.3, 0.0, 0.8, 0.15]"
+            },
+            "standard": {
+              "type": "object",
+              "default": "[0.2, 0.0, 0.0, 1.0]"
+            },
+            "standardDecelerate": {
+              "type": "object",
+              "default": "[0.0, 0.0, 0.0, 1.0]"
+            },
+            "standardAccelerate": {
+              "type": "object",
+              "default": "[0.3, 0.0, 1.0, 1.0]"
+            },
+            "linear": {
+              "type": "integer"
+            },
+            "inQuad": {
+              "type": "integer"
+            },
+            "outQuad": {
+              "type": "integer"
+            },
+            "inOutQuad": {
+              "type": "integer"
+            },
+            "inCubic": {
+              "type": "integer"
+            },
+            "outCubic": {
+              "type": "integer"
+            },
+            "inOutCubic": {
+              "type": "integer"
+            },
+            "inQuart": {
+              "type": "integer"
+            },
+            "outQuart": {
+              "type": "integer"
+            },
+            "inOutQuart": {
+              "type": "integer"
+            },
+            "inQuint": {
+              "type": "integer"
+            },
+            "outQuint": {
+              "type": "integer"
+            },
+            "inOutQuint": {
+              "type": "integer"
+            },
+            "inExpo": {
+              "type": "integer"
+            },
+            "outExpo": {
+              "type": "integer"
+            },
+            "inOutExpo": {
+              "type": "integer"
+            },
+            "inCirc": {
+              "type": "integer"
+            },
+            "outCirc": {
+              "type": "integer"
+            },
+            "inOutCirc": {
+              "type": "integer"
+            },
+            "inElastic": {
+              "type": "integer"
+            },
+            "outElastic": {
+              "type": "integer"
+            },
+            "inOutElastic": {
+              "type": "integer"
+            },
+            "inBack": {
+              "type": "integer"
+            },
+            "outBack": {
+              "type": "integer"
+            },
+            "inOutBack": {
+              "type": "integer"
+            },
+            "inBounce": {
+              "type": "integer"
+            },
+            "outBounce": {
+              "type": "integer"
+            },
+            "inOutBounce": {
+              "type": "integer"
+            },
+            "page": {
+              "type": "string",
+              "default": "QtObject {"
+            },
+            "type": {
+              "type": "string",
+              "default": "slide"
+            },
+            "duration": {
+              "type": "integer",
+              "default": 300
+            },
+            "easing": {
+              "type": "object",
+              "default": "curves.emphasized"
+            },
+            "direction": {
+              "type": "string",
+              "default": "horizontal"
+            },
+            "scaleFrom": {
+              "type": "number",
+              "default": 0.9
+            },
+            "scaleTo": {
+              "type": "number",
+              "default": 1.0
+            },
+            "stagger": {
+              "type": "integer",
+              "default": 50
+            },
+            "fadeInDuration": {
+              "type": "integer",
+              "default": 150
+            },
+            "fadeOutDuration": {
+              "type": "integer",
+              "default": 75
+            },
+            "scaleOrigin": {
+              "type": "number",
+              "default": 0.95
+            },
+            "damping": {
+              "type": "number",
+              "default": 0.8
+            },
+            "mass": {
+              "type": "number",
+              "default": 1.0
+            },
+            "stiffness": {
+              "type": "number",
+              "default": 100.0
+            },
+            "velocity": {
+              "type": "number",
+              "default": 0.0
+            },
+            "epsilon": {
+              "type": "number",
+              "default": 0.01
+            },
+            "modulus": {
+              "type": "integer",
+              "default": 0
+            },
+            "factor": {
+              "type": "number",
+              "default": 0.5
+            },
+            "maxRadius": {
+              "type": "number",
+              "default": 100.0
+            },
+            "opacity": {
+              "type": "number",
+              "default": 0.12
+            },
+            "scale": {
+              "type": "number",
+              "default": 1.05
+            },
+            "glowRadius": {
+              "type": "integer",
+              "default": 4
+            },
+            "glowOpacity": {
+              "type": "number",
+              "default": 0.12
+            },
+            "smoothScrolling": {
+              "type": "boolean",
+              "default": true
+            },
+            "bounceEffect": {
+              "type": "boolean",
+              "default": true
+            },
+            "bounceDamping": {
+              "type": "number",
+              "default": 0.5
+            },
+            "dotCount": {
+              "type": "integer",
+              "default": 3
+            },
+            "dotDelay": {
+              "type": "integer",
+              "default": 200
+            }
+          }
+        },
+        "servicesIntegration": {
+          "type": "object",
+          "description": "Configuration for servicesIntegration module",
+          "properties": {
+            "api": {
+              "type": "object",
+              "properties": {
+                "baseUrl": {
+                  "type": "string",
+                  "default": "\"http:",
+                  "description": "localhost:8080\""
+                },
+                "timeout": {
+                  "type": "integer",
+                  "default": 30000,
+                  "description": "Request timeout in ms"
+                },
+                "retryCount": {
+                  "type": "integer",
+                  "default": 3
+                },
+                "retryDelay": {
+                  "type": "integer",
+                  "default": 1000,
+                  "description": "Delay between retries in ms"
+                },
+                "enableCache": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "cacheExpiry": {
+                  "type": "integer",
+                  "default": 300000,
+                  "description": "Cache expiry in ms (5 minutes)"
+                },
+                "auth": {
+                  "type": "string",
+                  "default": "QtObject {"
+                },
+                "type": {
+                  "type": "string",
+                  "default": "none",
+                  "description": "\"none\", \"bearer\", \"api-key\", \"basic\""
+                },
+                "token": {
+                  "type": "string"
+                },
+                "apiKey": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            },
+            "weather": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "provider": {
+                  "type": "string",
+                  "default": "openweathermap",
+                  "description": "\"openweathermap\", \"weatherapi\", \"meteo\""
+                },
+                "apiKey": {
+                  "type": "string"
+                },
+                "location": {
+                  "type": "string",
+                  "default": "auto",
+                  "description": "\"auto\" or specific location"
+                },
+                "units": {
+                  "type": "string",
+                  "default": "metric",
+                  "description": "\"metric\", \"imperial\""
+                },
+                "updateInterval": {
+                  "type": "integer",
+                  "default": 1800000,
+                  "description": "30 minutes"
+                },
+                "retryInterval": {
+                  "type": "integer",
+                  "default": 60000,
+                  "description": "1 minute on error"
+                },
+                "showAlerts": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "maxForecastDays": {
+                  "type": "integer",
+                  "default": 5
+                }
+              }
+            },
+            "network": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "pingInterval": {
+                  "type": "integer",
+                  "default": 5000,
+                  "description": "Network check interval in ms"
+                },
+                "pingTarget": {
+                  "type": "string",
+                  "default": "8.8.8.8"
+                },
+                "pingTimeout": {
+                  "type": "integer",
+                  "default": 3000
+                },
+                "monitorBandwidth": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "bandwidthUpdateInterval": {
+                  "type": "integer",
+                  "default": 1000
+                },
+                "showIPAddress": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "showHostname": {
+                  "type": "boolean",
+                  "default": true
+                }
+              }
+            },
+            "systemMonitor": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "updateInterval": {
+                  "type": "integer",
+                  "default": 1000,
+                  "description": "Update interval in ms"
+                },
+                "monitorCPU": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "monitorMemory": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "monitorDisk": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "monitorGPU": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "monitorTemperature": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "monitorBattery": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "historySize": {
+                  "type": "integer",
+                  "default": 60,
+                  "description": "Number of data points to keep"
+                },
+                "cpuWarningThreshold": {
+                  "type": "number",
+                  "default": 80.0,
+                  "description": "Percentage"
+                },
+                "memoryWarningThreshold": {
+                  "type": "number",
+                  "default": 90.0,
+                  "description": "Percentage"
+                },
+                "temperatureWarningThreshold": {
+                  "type": "number",
+                  "default": 80.0,
+                  "description": "Celsius"
+                }
+              }
+            },
+            "mediaPlayer": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "preferredPlayer": {
+                  "type": "string",
+                  "default": "auto",
+                  "description": "\"auto\", \"spotify\", \"mpd\", \"vlc\", etc."
+                },
+                "showAlbumArt": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "albumArtSize": {
+                  "type": "integer",
+                  "default": 64
+                },
+                "showProgress": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "updateInterval": {
+                  "type": "integer",
+                  "default": 500
+                },
+                "enableControls": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "enableGestures": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "seekStep": {
+                  "type": "integer",
+                  "default": 5000,
+                  "description": "Seek step in ms"
+                }
+              }
+            },
+            "notifications": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "maxNotifications": {
+                  "type": "integer",
+                  "default": 10
+                },
+                "defaultTimeout": {
+                  "type": "integer",
+                  "default": 5000,
+                  "description": "Default notification timeout in ms"
+                },
+                "groupByApp": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "showActions": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "playSound": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "soundFile": {
+                  "type": "string"
+                },
+                "showOnLockScreen": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "position": {
+                  "type": "string",
+                  "default": "top-right",
+                  "description": "\"top-left\", \"top-right\", \"bottom-left\", \"bottom-right\""
+                },
+                "spacing": {
+                  "type": "integer",
+                  "default": 8
+                },
+                "width": {
+                  "type": "integer",
+                  "default": 350
+                },
+                "persistentHistory": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "historySize": {
+                  "type": "integer",
+                  "default": 50
+                }
+              }
+            },
+            "bluetooth": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "scanInterval": {
+                  "type": "integer",
+                  "default": 10000,
+                  "description": "Device scan interval in ms"
+                },
+                "scanDuration": {
+                  "type": "integer",
+                  "default": 5000,
+                  "description": "Scan duration in ms"
+                },
+                "autoConnect": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "trustedDevices": {
+                  "type": "object",
+                  "description": "List of MAC addresses"
+                },
+                "showBatteryLevel": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "notifyOnConnect": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "notifyOnDisconnect": {
+                  "type": "boolean",
+                  "default": true
+                }
+              }
+            },
+            "audio": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "defaultSink": {
+                  "type": "string",
+                  "default": "@DEFAULT_SINK@"
+                },
+                "defaultSource": {
+                  "type": "string",
+                  "default": "@DEFAULT_SOURCE@"
+                },
+                "volumeStep": {
+                  "type": "integer",
+                  "default": 5,
+                  "description": "Volume change step percentage"
+                },
+                "showVolumeOSD": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "osdTimeout": {
+                  "type": "integer",
+                  "default": 1500
+                },
+                "muteOnLock": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "pauseOnLock": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "updateInterval": {
+                  "type": "integer",
+                  "default": 100
+                }
+              }
+            },
+            "calendar": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "provider": {
+                  "type": "string",
+                  "default": "local",
+                  "description": "\"local\", \"google\", \"outlook\", \"caldav\""
+                },
+                "calendarUrl": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "syncInterval": {
+                  "type": "integer",
+                  "default": 300000,
+                  "description": "5 minutes"
+                },
+                "eventLookahead": {
+                  "type": "integer",
+                  "default": 7,
+                  "description": "Days to look ahead"
+                },
+                "showAllDayEvents": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "showDeclinedEvents": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "notifyUpcoming": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "notifyMinutesBefore": {
+                  "type": "integer",
+                  "default": 15
+                }
+              }
+            },
+            "email": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "provider": {
+                  "type": "string",
+                  "default": "imap",
+                  "description": "\"imap\", \"gmail\", \"outlook\""
+                },
+                "server": {
+                  "type": "string"
+                },
+                "port": {
+                  "type": "integer",
+                  "default": 993
+                },
+                "ssl": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "checkInterval": {
+                  "type": "integer",
+                  "default": 300000,
+                  "description": "5 minutes"
+                },
+                "notifyNewMail": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "maxPreviewLength": {
+                  "type": "integer",
+                  "default": 100
+                },
+                "folders": {
+                  "type": "object",
+                  "default": "[\"INBOX\"]"
+                }
+              }
+            },
+            "fileWatcher": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "watchPaths": {
+                  "type": "object",
+                  "description": "Paths to watch"
+                },
+                "recursive": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "notifyOnChange": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "debounceDelay": {
+                  "type": "integer",
+                  "default": 500,
+                  "description": "Debounce file change events"
+                }
+              }
+            },
+            "commands": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "defaultTimeout": {
+                  "type": "integer",
+                  "default": 10000,
+                  "description": "Default command timeout in ms"
+                },
+                "logOutput": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "notifyOnError": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "environment": {
+                  "type": "object",
+                  "default": "{"
+                }
+              }
+            },
+            "websocket": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "url": {
+                  "type": "string",
+                  "default": "\"ws:",
+                  "description": "localhost:8080/ws\""
+                },
+                "autoReconnect": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "reconnectInterval": {
+                  "type": "integer",
+                  "default": 5000
+                },
+                "pingInterval": {
+                  "type": "integer",
+                  "default": 30000
+                },
+                "pingTimeout": {
+                  "type": "integer",
+                  "default": 5000
+                },
+                "maxReconnectAttempts": {
+                  "type": "integer",
+                  "default": 10
+                }
+              }
+            },
+            "database": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "type": {
+                  "type": "string",
+                  "default": "sqlite",
+                  "description": "\"sqlite\", \"mysql\", \"postgresql\""
+                },
+                "host": {
+                  "type": "string",
+                  "default": "localhost"
+                },
+                "port": {
+                  "type": "integer",
+                  "default": 3306
+                },
+                "name": {
+                  "type": "string",
+                  "default": "heimdall"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "connectionPoolSize": {
+                  "type": "integer",
+                  "default": 5
+                },
+                "queryTimeout": {
+                  "type": "integer",
+                  "default": 5000
+                }
+              }
+            },
+            "backup": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "autoBackup": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "backupInterval": {
+                  "type": "integer",
+                  "default": 86400000,
+                  "description": "24 hours"
+                },
+                "maxBackups": {
+                  "type": "integer",
+                  "default": 10
+                },
+                "compressBackups": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "encryptBackups": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "encryptionKey": {
+                  "type": "string"
+                }
+              }
+            },
+            "baseUrl": {
+              "type": "string",
+              "default": "\"http:"
+            },
+            "timeout": {
+              "type": "integer",
+              "default": 30000
+            },
+            "retryCount": {
+              "type": "integer",
+              "default": 3
+            },
+            "retryDelay": {
+              "type": "integer",
+              "default": 1000
+            },
+            "enableCache": {
+              "type": "boolean",
+              "default": true
+            },
+            "cacheExpiry": {
+              "type": "integer",
+              "default": 300000
+            },
+            "auth": {
+              "type": "string",
+              "default": "QtObject {"
+            },
+            "type": {
+              "type": "string",
+              "default": "none"
+            },
+            "token": {
+              "type": "string"
+            },
+            "apiKey": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "provider": {
+              "type": "string",
+              "default": "openweathermap"
+            },
+            "location": {
+              "type": "string",
+              "default": "auto"
+            },
+            "units": {
+              "type": "string",
+              "default": "metric"
+            },
+            "updateInterval": {
+              "type": "integer",
+              "default": 1800000
+            },
+            "retryInterval": {
+              "type": "integer",
+              "default": 60000
+            },
+            "showAlerts": {
+              "type": "boolean",
+              "default": true
+            },
+            "maxForecastDays": {
+              "type": "integer",
+              "default": 5
+            },
+            "pingInterval": {
+              "type": "integer",
+              "default": 5000
+            },
+            "pingTarget": {
+              "type": "string",
+              "default": "8.8.8.8"
+            },
+            "pingTimeout": {
+              "type": "integer",
+              "default": 3000
+            },
+            "monitorBandwidth": {
+              "type": "boolean",
+              "default": true
+            },
+            "bandwidthUpdateInterval": {
+              "type": "integer",
+              "default": 1000
+            },
+            "showIPAddress": {
+              "type": "boolean",
+              "default": true
+            },
+            "showHostname": {
+              "type": "boolean",
+              "default": true
+            },
+            "monitorCPU": {
+              "type": "boolean",
+              "default": true
+            },
+            "monitorMemory": {
+              "type": "boolean",
+              "default": true
+            },
+            "monitorDisk": {
+              "type": "boolean",
+              "default": true
+            },
+            "monitorGPU": {
+              "type": "boolean",
+              "default": false
+            },
+            "monitorTemperature": {
+              "type": "boolean",
+              "default": true
+            },
+            "monitorBattery": {
+              "type": "boolean",
+              "default": true
+            },
+            "historySize": {
+              "type": "integer",
+              "default": 60
+            },
+            "cpuWarningThreshold": {
+              "type": "number",
+              "default": 80.0
+            },
+            "memoryWarningThreshold": {
+              "type": "number",
+              "default": 90.0
+            },
+            "temperatureWarningThreshold": {
+              "type": "number",
+              "default": 80.0
+            },
+            "preferredPlayer": {
+              "type": "string",
+              "default": "auto"
+            },
+            "showAlbumArt": {
+              "type": "boolean",
+              "default": true
+            },
+            "albumArtSize": {
+              "type": "integer",
+              "default": 64
+            },
+            "showProgress": {
+              "type": "boolean",
+              "default": true
+            },
+            "enableControls": {
+              "type": "boolean",
+              "default": true
+            },
+            "enableGestures": {
+              "type": "boolean",
+              "default": true
+            },
+            "seekStep": {
+              "type": "integer",
+              "default": 5000
+            },
+            "maxNotifications": {
+              "type": "integer",
+              "default": 10
+            },
+            "defaultTimeout": {
+              "type": "integer",
+              "default": 5000
+            },
+            "groupByApp": {
+              "type": "boolean",
+              "default": true
+            },
+            "showActions": {
+              "type": "boolean",
+              "default": true
+            },
+            "playSound": {
+              "type": "boolean",
+              "default": true
+            },
+            "soundFile": {
+              "type": "string"
+            },
+            "showOnLockScreen": {
+              "type": "boolean",
+              "default": false
+            },
+            "position": {
+              "type": "string",
+              "default": "top-right"
+            },
+            "spacing": {
+              "type": "integer",
+              "default": 8
+            },
+            "width": {
+              "type": "integer",
+              "default": 350
+            },
+            "persistentHistory": {
+              "type": "boolean",
+              "default": true
+            },
+            "scanInterval": {
+              "type": "integer",
+              "default": 10000
+            },
+            "scanDuration": {
+              "type": "integer",
+              "default": 5000
+            },
+            "autoConnect": {
+              "type": "boolean",
+              "default": true
+            },
+            "trustedDevices": {
+              "type": "object"
+            },
+            "showBatteryLevel": {
+              "type": "boolean",
+              "default": true
+            },
+            "notifyOnConnect": {
+              "type": "boolean",
+              "default": true
+            },
+            "notifyOnDisconnect": {
+              "type": "boolean",
+              "default": true
+            },
+            "defaultSink": {
+              "type": "string",
+              "default": "@DEFAULT_SINK@"
+            },
+            "defaultSource": {
+              "type": "string",
+              "default": "@DEFAULT_SOURCE@"
+            },
+            "volumeStep": {
+              "type": "integer",
+              "default": 5
+            },
+            "showVolumeOSD": {
+              "type": "boolean",
+              "default": true
+            },
+            "osdTimeout": {
+              "type": "integer",
+              "default": 1500
+            },
+            "muteOnLock": {
+              "type": "boolean",
+              "default": false
+            },
+            "pauseOnLock": {
+              "type": "boolean",
+              "default": true
+            },
+            "calendarUrl": {
+              "type": "string"
+            },
+            "syncInterval": {
+              "type": "integer",
+              "default": 300000
+            },
+            "eventLookahead": {
+              "type": "integer",
+              "default": 7
+            },
+            "showAllDayEvents": {
+              "type": "boolean",
+              "default": true
+            },
+            "showDeclinedEvents": {
+              "type": "boolean",
+              "default": false
+            },
+            "notifyUpcoming": {
+              "type": "boolean",
+              "default": true
+            },
+            "notifyMinutesBefore": {
+              "type": "integer",
+              "default": 15
+            },
+            "server": {
+              "type": "string"
+            },
+            "port": {
+              "type": "integer",
+              "default": 993
+            },
+            "ssl": {
+              "type": "boolean",
+              "default": true
+            },
+            "checkInterval": {
+              "type": "integer",
+              "default": 300000
+            },
+            "notifyNewMail": {
+              "type": "boolean",
+              "default": true
+            },
+            "maxPreviewLength": {
+              "type": "integer",
+              "default": 100
+            },
+            "folders": {
+              "type": "object",
+              "default": "[\"INBOX\"]"
+            },
+            "watchPaths": {
+              "type": "object"
+            },
+            "recursive": {
+              "type": "boolean",
+              "default": true
+            },
+            "notifyOnChange": {
+              "type": "boolean",
+              "default": true
+            },
+            "debounceDelay": {
+              "type": "integer",
+              "default": 500
+            },
+            "ignorePatterns": {
+              "type": "object",
+              "default": "[\"*.tmp\", \"*.swp\", \".git"
+            },
+            "shell": {
+              "type": "string"
+            },
+            "logOutput": {
+              "type": "boolean",
+              "default": false
+            },
+            "notifyOnError": {
+              "type": "boolean",
+              "default": true
+            },
+            "environment": {
+              "type": "object"
+            },
+            "url": {
+              "type": "string",
+              "default": "\"ws:"
+            },
+            "autoReconnect": {
+              "type": "boolean",
+              "default": true
+            },
+            "reconnectInterval": {
+              "type": "integer",
+              "default": 5000
+            },
+            "maxReconnectAttempts": {
+              "type": "integer",
+              "default": 10
+            },
+            "path": {
+              "type": "string",
+              "default": "\"~"
+            },
+            "host": {
+              "type": "string",
+              "default": "localhost"
+            },
+            "name": {
+              "type": "string",
+              "default": "heimdall"
+            },
+            "connectionPoolSize": {
+              "type": "integer",
+              "default": 5
+            },
+            "queryTimeout": {
+              "type": "integer",
+              "default": 5000
+            },
+            "autoBackup": {
+              "type": "boolean",
+              "default": true
+            },
+            "backupInterval": {
+              "type": "integer",
+              "default": 86400000
+            },
+            "backupPath": {
+              "type": "string",
+              "default": "\"~"
+            },
+            "maxBackups": {
+              "type": "integer",
+              "default": 10
+            },
+            "compressBackups": {
+              "type": "boolean",
+              "default": true
+            },
+            "encryptBackups": {
+              "type": "boolean",
+              "default": false
+            },
+            "encryptionKey": {
+              "type": "string"
+            }
+          }
+        },
+        "behavior": {
+          "type": "object",
+          "description": "Configuration for behavior module",
+          "properties": {
+            "interaction": {
+              "type": "object",
+              "properties": {
+                "click": {
+                  "type": "string",
+                  "default": "QtObject {"
+                },
+                "singleClickDelay": {
+                  "type": "integer",
+                  "default": 250,
+                  "description": "Max delay for single click"
+                },
+                "doubleClickInterval": {
+                  "type": "integer",
+                  "default": 400,
+                  "description": "Max interval between clicks for double-click"
+                },
+                "longPressDelay": {
+                  "type": "integer",
+                  "default": 500,
+                  "description": "Delay for long press"
+                },
+                "clickRadius": {
+                  "type": "integer",
+                  "default": 5,
+                  "description": "Movement tolerance in pixels"
+                },
+                "vibrateFeedback": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Haptic feedback on click"
+                }
+              }
+            },
+            "drag": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "threshold": {
+                  "type": "integer",
+                  "default": 10,
+                  "description": "Pixels before drag starts"
+                },
+                "sensitivity": {
+                  "type": "number",
+                  "default": 1.0,
+                  "description": "Drag sensitivity multiplier"
+                },
+                "showGhost": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Show ghost image while dragging"
+                },
+                "ghostOpacity": {
+                  "type": "number",
+                  "default": 0.5
+                },
+                "snapToGrid": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "gridSize": {
+                  "type": "integer",
+                  "default": 10
+                }
+              }
+            },
+            "swipe": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "minDistance": {
+                  "type": "integer",
+                  "default": 50,
+                  "description": "Minimum swipe distance in pixels"
+                },
+                "maxDuration": {
+                  "type": "integer",
+                  "default": 300,
+                  "description": "Maximum swipe duration in ms"
+                },
+                "minVelocity": {
+                  "type": "number",
+                  "default": 0.5,
+                  "description": "Minimum velocity for swipe"
+                },
+                "leftAction": {
+                  "type": "string",
+                  "default": "back"
+                },
+                "rightAction": {
+                  "type": "string",
+                  "default": "forward"
+                },
+                "upAction": {
+                  "type": "string",
+                  "default": "refresh"
+                },
+                "downAction": {
+                  "type": "string",
+                  "default": "close"
+                }
+              }
+            },
+            "pinch": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "minScale": {
+                  "type": "number",
+                  "default": 0.5
+                },
+                "maxScale": {
+                  "type": "number",
+                  "default": 3.0
+                },
+                "sensitivity": {
+                  "type": "number",
+                  "default": 1.0
+                },
+                "smoothScaling": {
+                  "type": "boolean",
+                  "default": true
+                }
+              }
+            },
+            "hover": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "enterDelay": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Delay before hover state"
+                },
+                "exitDelay": {
+                  "type": "integer",
+                  "default": 0,
+                  "description": "Delay before leaving hover state"
+                },
+                "showTooltip": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "tooltipDelay": {
+                  "type": "integer",
+                  "default": 500
+                },
+                "highlightOnHover": {
+                  "type": "boolean",
+                  "default": true
+                }
+              }
+            },
+            "focus": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "showIndicator": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "trapFocus": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Trap focus within component"
+                },
+                "autoFocus": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Auto-focus first element"
+                },
+                "traversalMode": {
+                  "type": "string",
+                  "default": "natural",
+                  "description": "\"natural\", \"horizontal\", \"vertical\""
+                }
+              }
+            },
+            "keyboard": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "vimMode": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Enable vim-style navigation"
+                },
+                "emacsMode": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Enable emacs-style navigation"
+                },
+                "navigation": {
+                  "type": "string",
+                  "default": "QtObject {"
+                },
+                "up": {
+                  "type": "string",
+                  "default": "Up"
+                },
+                "down": {
+                  "type": "string",
+                  "default": "Down"
+                },
+                "left": {
+                  "type": "string",
+                  "default": "Left"
+                },
+                "right": {
+                  "type": "string",
+                  "default": "Right"
+                },
+                "pageUp": {
+                  "type": "string",
+                  "default": "PageUp"
+                },
+                "pageDown": {
+                  "type": "string",
+                  "default": "PageDown"
+                },
+                "home": {
+                  "type": "string",
+                  "default": "Home"
+                },
+                "end": {
+                  "type": "string",
+                  "default": "End"
+                },
+                "tab": {
+                  "type": "string",
+                  "default": "Tab"
+                },
+                "shiftTab": {
+                  "type": "string",
+                  "default": "Shift+Tab"
+                }
+              }
+            },
+            "actions": {
+              "type": "object",
+              "properties": {
+                "select": {
+                  "type": "string",
+                  "default": "Return"
+                },
+                "cancel": {
+                  "type": "string",
+                  "default": "Escape"
+                },
+                "delete": {
+                  "type": "string",
+                  "default": "Delete"
+                },
+                "cut": {
+                  "type": "string",
+                  "default": "Ctrl+X"
+                },
+                "copy": {
+                  "type": "string",
+                  "default": "Ctrl+C"
+                },
+                "paste": {
+                  "type": "string",
+                  "default": "Ctrl+V"
+                },
+                "undo": {
+                  "type": "string",
+                  "default": "Ctrl+Z"
+                },
+                "redo": {
+                  "type": "string",
+                  "default": "Ctrl+Shift+Z"
+                },
+                "selectAll": {
+                  "type": "string",
+                  "default": "Ctrl+A"
+                },
+                "find": {
+                  "type": "string",
+                  "default": "Ctrl+F"
+                },
+                "replace": {
+                  "type": "string",
+                  "default": "Ctrl+H"
+                }
+              }
+            },
+            "global": {
+              "type": "object",
+              "properties": {
+                "launcher": {
+                  "type": "string",
+                  "default": "Meta+Space"
+                },
+                "dashboard": {
+                  "type": "string",
+                  "default": "Meta+D"
+                },
+                "controlCenter": {
+                  "type": "string",
+                  "default": "Meta+C"
+                },
+                "notifications": {
+                  "type": "string",
+                  "default": "Meta+N"
+                },
+                "lock": {
+                  "type": "string",
+                  "default": "Meta+L"
+                },
+                "logout": {
+                  "type": "string",
+                  "default": "Meta+Shift+L"
+                },
+                "screenshot": {
+                  "type": "string",
+                  "default": "Print"
+                },
+                "volumeUp": {
+                  "type": "string",
+                  "default": "XF86AudioRaiseVolume"
+                },
+                "volumeDown": {
+                  "type": "string",
+                  "default": "XF86AudioLowerVolume"
+                },
+                "volumeMute": {
+                  "type": "string",
+                  "default": "XF86AudioMute"
+                }
+              }
+            },
+            "repeat": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "delay": {
+                  "type": "integer",
+                  "default": 500,
+                  "description": "Initial delay before repeat"
+                },
+                "rate": {
+                  "type": "integer",
+                  "default": 30,
+                  "description": "Repeat rate in ms"
+                }
+              }
+            },
+            "mouse": {
+              "type": "object",
+              "properties": {
+                "naturalScroll": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "Reverse scroll direction"
+                },
+                "scrollSpeed": {
+                  "type": "integer",
+                  "default": 3,
+                  "description": "Lines per scroll"
+                },
+                "scrollMultiplier": {
+                  "type": "number",
+                  "default": 1.0
+                },
+                "smoothScroll": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "wheelDelta": {
+                  "type": "integer",
+                  "default": 120,
+                  "description": "Standard wheel delta"
+                },
+                "middleClickPaste": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "rightClickAction": {
+                  "type": "string",
+                  "default": "contextMenu",
+                  "description": "\"contextMenu\", \"back\", \"none\""
+                },
+                "cursorSize": {
+                  "type": "integer",
+                  "default": 24
+                },
+                "cursorAutoHide": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "cursorHideDelay": {
+                  "type": "integer",
+                  "default": 3000
+                }
+              }
+            },
+            "touch": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "tapRadius": {
+                  "type": "integer",
+                  "default": 20,
+                  "description": "Touch tap radius"
+                },
+                "multiTouch": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "maxTouchPoints": {
+                  "type": "integer",
+                  "default": 10
+                },
+                "edgeSwipe": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "edgeSwipeThreshold": {
+                  "type": "integer",
+                  "default": 20
+                },
+                "kineticScroll": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "friction": {
+                  "type": "number",
+                  "default": 0.9
+                }
+              }
+            },
+            "window": {
+              "type": "object",
+              "properties": {
+                "rememberPosition": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "rememberSize": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "centerOnOpen": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "snapToEdges": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "snapDistance": {
+                  "type": "integer",
+                  "default": 10
+                },
+                "showInTaskbar": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "alwaysOnTop": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "skipTaskbar": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "skipPager": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "focusPolicy": {
+                  "type": "string",
+                  "default": "click",
+                  "description": "\"click\", \"hover\", \"none\""
+                },
+                "raiseonFocus": {
+                  "type": "boolean",
+                  "default": true
+                }
+              }
+            },
+            "state": {
+              "type": "object",
+              "properties": {
+                "persistent": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Save state between sessions"
+                },
+                "autoSave": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "autoSaveInterval": {
+                  "type": "integer",
+                  "default": 60000,
+                  "description": "Auto-save interval in ms"
+                },
+                "compressState": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "maxStateHistory": {
+                  "type": "integer",
+                  "default": 10
+                },
+                "restoreOnCrash": {
+                  "type": "boolean",
+                  "default": true
+                }
+              }
+            },
+            "search": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "liveSearch": {
+                  "type": "boolean",
+                  "default": true,
+                  "description": "Search as you type"
+                },
+                "searchDelay": {
+                  "type": "integer",
+                  "default": 300,
+                  "description": "Delay before search starts"
+                },
+                "fuzzySearch": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "caseSensitive": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "regexSearch": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "highlightMatches": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "maxResults": {
+                  "type": "integer",
+                  "default": 50
+                },
+                "searchHistory": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "historySize": {
+                  "type": "integer",
+                  "default": 100
+                }
+              }
+            },
+            "accessibility": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "screenReader": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "highContrast": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "reducedMotion": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "largeText": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "textScale": {
+                  "type": "number",
+                  "default": 1.0
+                },
+                "keyboardOnly": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "announceChanges": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "announceDelay": {
+                  "type": "integer",
+                  "default": 100
+                }
+              }
+            },
+            "performance": {
+              "type": "object",
+              "properties": {
+                "enableGPU": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "enableCaching": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "cacheSize": {
+                  "type": "integer",
+                  "default": 100,
+                  "description": "MB"
+                },
+                "lazyLoading": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "lazyLoadThreshold": {
+                  "type": "integer",
+                  "default": 100,
+                  "description": "Pixels from viewport"
+                },
+                "virtualScrolling": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "virtualBufferSize": {
+                  "type": "integer",
+                  "default": 3,
+                  "description": "Screens worth of content"
+                },
+                "throttleUpdates": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "updateThrottle": {
+                  "type": "integer",
+                  "default": 16,
+                  "description": "ms (60 FPS)"
+                },
+                "reducedEffects": {
+                  "type": "boolean",
+                  "default": false
+                }
+              }
+            },
+            "errorHandling": {
+              "type": "object",
+              "properties": {
+                "showErrors": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "logErrors": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "notifyOnError": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "errorNotificationTimeout": {
+                  "type": "integer",
+                  "default": 5000
+                },
+                "autoRecover": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "maxRetries": {
+                  "type": "integer",
+                  "default": 3
+                },
+                "reportCrashes": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "crashReportUrl": {
+                  "type": "string"
+                }
+              }
+            },
+            "updates": {
+              "type": "object",
+              "properties": {
+                "autoCheck": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "checkInterval": {
+                  "type": "integer",
+                  "default": 86400000,
+                  "description": "24 hours"
+                },
+                "autoDownload": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "autoInstall": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "notifyAvailable": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "updateChannel": {
+                  "type": "string",
+                  "default": "stable",
+                  "description": "\"stable\", \"beta\", \"nightly\""
+                },
+                "updateUrl": {
+                  "type": "string"
+                }
+              }
+            },
+            "click": {
+              "type": "string",
+              "default": "QtObject {"
+            },
+            "singleClickDelay": {
+              "type": "integer",
+              "default": 250
+            },
+            "doubleClickInterval": {
+              "type": "integer",
+              "default": 400
+            },
+            "longPressDelay": {
+              "type": "integer",
+              "default": 500
+            },
+            "clickRadius": {
+              "type": "integer",
+              "default": 5
+            },
+            "vibrateFeedback": {
+              "type": "boolean",
+              "default": false
+            },
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "threshold": {
+              "type": "integer",
+              "default": 10
+            },
+            "sensitivity": {
+              "type": "number",
+              "default": 1.0
+            },
+            "showGhost": {
+              "type": "boolean",
+              "default": true
+            },
+            "ghostOpacity": {
+              "type": "number",
+              "default": 0.5
+            },
+            "snapToGrid": {
+              "type": "boolean",
+              "default": false
+            },
+            "gridSize": {
+              "type": "integer",
+              "default": 10
+            },
+            "minDistance": {
+              "type": "integer",
+              "default": 50
+            },
+            "maxDuration": {
+              "type": "integer",
+              "default": 300
+            },
+            "minVelocity": {
+              "type": "number",
+              "default": 0.5
+            },
+            "leftAction": {
+              "type": "string",
+              "default": "back"
+            },
+            "rightAction": {
+              "type": "string",
+              "default": "forward"
+            },
+            "upAction": {
+              "type": "string",
+              "default": "refresh"
+            },
+            "downAction": {
+              "type": "string",
+              "default": "close"
+            },
+            "minScale": {
+              "type": "number",
+              "default": 0.5
+            },
+            "maxScale": {
+              "type": "number",
+              "default": 3.0
+            },
+            "smoothScaling": {
+              "type": "boolean",
+              "default": true
+            },
+            "enterDelay": {
+              "type": "integer",
+              "default": 0
+            },
+            "exitDelay": {
+              "type": "integer",
+              "default": 0
+            },
+            "showTooltip": {
+              "type": "boolean",
+              "default": true
+            },
+            "tooltipDelay": {
+              "type": "integer",
+              "default": 500
+            },
+            "highlightOnHover": {
+              "type": "boolean",
+              "default": true
+            },
+            "showIndicator": {
+              "type": "boolean",
+              "default": true
+            },
+            "trapFocus": {
+              "type": "boolean",
+              "default": false
+            },
+            "autoFocus": {
+              "type": "boolean",
+              "default": false
+            },
+            "traversalMode": {
+              "type": "string",
+              "default": "natural"
+            },
+            "vimMode": {
+              "type": "boolean",
+              "default": false
+            },
+            "emacsMode": {
+              "type": "boolean",
+              "default": false
+            },
+            "navigation": {
+              "type": "string",
+              "default": "QtObject {"
+            },
+            "up": {
+              "type": "string",
+              "default": "Up"
+            },
+            "down": {
+              "type": "string",
+              "default": "Down"
+            },
+            "left": {
+              "type": "string",
+              "default": "Left"
+            },
+            "right": {
+              "type": "string",
+              "default": "Right"
+            },
+            "pageUp": {
+              "type": "string",
+              "default": "PageUp"
+            },
+            "pageDown": {
+              "type": "string",
+              "default": "PageDown"
+            },
+            "home": {
+              "type": "string",
+              "default": "Home"
+            },
+            "end": {
+              "type": "string",
+              "default": "End"
+            },
+            "tab": {
+              "type": "string",
+              "default": "Tab"
+            },
+            "shiftTab": {
+              "type": "string",
+              "default": "Shift+Tab"
+            },
+            "select": {
+              "type": "string",
+              "default": "Return"
+            },
+            "cancel": {
+              "type": "string",
+              "default": "Escape"
+            },
+            "delete": {
+              "type": "string",
+              "default": "Delete"
+            },
+            "cut": {
+              "type": "string",
+              "default": "Ctrl+X"
+            },
+            "copy": {
+              "type": "string",
+              "default": "Ctrl+C"
+            },
+            "paste": {
+              "type": "string",
+              "default": "Ctrl+V"
+            },
+            "undo": {
+              "type": "string",
+              "default": "Ctrl+Z"
+            },
+            "redo": {
+              "type": "string",
+              "default": "Ctrl+Shift+Z"
+            },
+            "selectAll": {
+              "type": "string",
+              "default": "Ctrl+A"
+            },
+            "find": {
+              "type": "string",
+              "default": "Ctrl+F"
+            },
+            "replace": {
+              "type": "string",
+              "default": "Ctrl+H"
+            },
+            "launcher": {
+              "type": "string",
+              "default": "Meta+Space"
+            },
+            "dashboard": {
+              "type": "string",
+              "default": "Meta+D"
+            },
+            "controlCenter": {
+              "type": "string",
+              "default": "Meta+C"
+            },
+            "notifications": {
+              "type": "string",
+              "default": "Meta+N"
+            },
+            "lock": {
+              "type": "string",
+              "default": "Meta+L"
+            },
+            "logout": {
+              "type": "string",
+              "default": "Meta+Shift+L"
+            },
+            "screenshot": {
+              "type": "string",
+              "default": "Print"
+            },
+            "volumeUp": {
+              "type": "string",
+              "default": "XF86AudioRaiseVolume"
+            },
+            "volumeDown": {
+              "type": "string",
+              "default": "XF86AudioLowerVolume"
+            },
+            "volumeMute": {
+              "type": "string",
+              "default": "XF86AudioMute"
+            },
+            "delay": {
+              "type": "integer",
+              "default": 500
+            },
+            "rate": {
+              "type": "integer",
+              "default": 30
+            },
+            "naturalScroll": {
+              "type": "boolean",
+              "default": false
+            },
+            "scrollSpeed": {
+              "type": "integer",
+              "default": 3
+            },
+            "scrollMultiplier": {
+              "type": "number",
+              "default": 1.0
+            },
+            "smoothScroll": {
+              "type": "boolean",
+              "default": true
+            },
+            "wheelDelta": {
+              "type": "integer",
+              "default": 120
+            },
+            "middleClickPaste": {
+              "type": "boolean",
+              "default": true
+            },
+            "rightClickAction": {
+              "type": "string",
+              "default": "contextMenu"
+            },
+            "cursorSize": {
+              "type": "integer",
+              "default": 24
+            },
+            "cursorAutoHide": {
+              "type": "boolean",
+              "default": true
+            },
+            "cursorHideDelay": {
+              "type": "integer",
+              "default": 3000
+            },
+            "tapRadius": {
+              "type": "integer",
+              "default": 20
+            },
+            "multiTouch": {
+              "type": "boolean",
+              "default": true
+            },
+            "maxTouchPoints": {
+              "type": "integer",
+              "default": 10
+            },
+            "edgeSwipe": {
+              "type": "boolean",
+              "default": true
+            },
+            "edgeSwipeThreshold": {
+              "type": "integer",
+              "default": 20
+            },
+            "kineticScroll": {
+              "type": "boolean",
+              "default": true
+            },
+            "friction": {
+              "type": "number",
+              "default": 0.9
+            },
+            "rememberPosition": {
+              "type": "boolean",
+              "default": true
+            },
+            "rememberSize": {
+              "type": "boolean",
+              "default": true
+            },
+            "centerOnOpen": {
+              "type": "boolean",
+              "default": false
+            },
+            "snapToEdges": {
+              "type": "boolean",
+              "default": true
+            },
+            "snapDistance": {
+              "type": "integer",
+              "default": 10
+            },
+            "showInTaskbar": {
+              "type": "boolean",
+              "default": true
+            },
+            "alwaysOnTop": {
+              "type": "boolean",
+              "default": false
+            },
+            "skipTaskbar": {
+              "type": "boolean",
+              "default": false
+            },
+            "skipPager": {
+              "type": "boolean",
+              "default": false
+            },
+            "focusPolicy": {
+              "type": "string",
+              "default": "click"
+            },
+            "raiseonFocus": {
+              "type": "boolean",
+              "default": true
+            },
+            "persistent": {
+              "type": "boolean",
+              "default": true
+            },
+            "autoSave": {
+              "type": "boolean",
+              "default": true
+            },
+            "autoSaveInterval": {
+              "type": "integer",
+              "default": 60000
+            },
+            "statePath": {
+              "type": "string",
+              "default": "\"~"
+            },
+            "compressState": {
+              "type": "boolean",
+              "default": true
+            },
+            "maxStateHistory": {
+              "type": "integer",
+              "default": 10
+            },
+            "restoreOnCrash": {
+              "type": "boolean",
+              "default": true
+            },
+            "liveSearch": {
+              "type": "boolean",
+              "default": true
+            },
+            "searchDelay": {
+              "type": "integer",
+              "default": 300
+            },
+            "fuzzySearch": {
+              "type": "boolean",
+              "default": true
+            },
+            "caseSensitive": {
+              "type": "boolean",
+              "default": false
+            },
+            "regexSearch": {
+              "type": "boolean",
+              "default": false
+            },
+            "highlightMatches": {
+              "type": "boolean",
+              "default": true
+            },
+            "maxResults": {
+              "type": "integer",
+              "default": 50
+            },
+            "searchHistory": {
+              "type": "boolean",
+              "default": true
+            },
+            "historySize": {
+              "type": "integer",
+              "default": 100
+            },
+            "screenReader": {
+              "type": "boolean",
+              "default": false
+            },
+            "highContrast": {
+              "type": "boolean",
+              "default": false
+            },
+            "reducedMotion": {
+              "type": "boolean",
+              "default": false
+            },
+            "largeText": {
+              "type": "boolean",
+              "default": false
+            },
+            "textScale": {
+              "type": "number",
+              "default": 1.0
+            },
+            "keyboardOnly": {
+              "type": "boolean",
+              "default": false
+            },
+            "announceChanges": {
+              "type": "boolean",
+              "default": true
+            },
+            "announceDelay": {
+              "type": "integer",
+              "default": 100
+            },
+            "enableGPU": {
+              "type": "boolean",
+              "default": true
+            },
+            "enableCaching": {
+              "type": "boolean",
+              "default": true
+            },
+            "cacheSize": {
+              "type": "integer",
+              "default": 100
+            },
+            "lazyLoading": {
+              "type": "boolean",
+              "default": true
+            },
+            "lazyLoadThreshold": {
+              "type": "integer",
+              "default": 100
+            },
+            "virtualScrolling": {
+              "type": "boolean",
+              "default": true
+            },
+            "virtualBufferSize": {
+              "type": "integer",
+              "default": 3
+            },
+            "throttleUpdates": {
+              "type": "boolean",
+              "default": true
+            },
+            "updateThrottle": {
+              "type": "integer",
+              "default": 16
+            },
+            "reducedEffects": {
+              "type": "boolean",
+              "default": false
+            },
+            "showErrors": {
+              "type": "boolean",
+              "default": true
+            },
+            "logErrors": {
+              "type": "boolean",
+              "default": true
+            },
+            "errorLogPath": {
+              "type": "string",
+              "default": "\"~"
+            },
+            "notifyOnError": {
+              "type": "boolean",
+              "default": true
+            },
+            "errorNotificationTimeout": {
+              "type": "integer",
+              "default": 5000
+            },
+            "autoRecover": {
+              "type": "boolean",
+              "default": true
+            },
+            "maxRetries": {
+              "type": "integer",
+              "default": 3
+            },
+            "reportCrashes": {
+              "type": "boolean",
+              "default": false
+            },
+            "crashReportUrl": {
+              "type": "string"
+            },
+            "autoCheck": {
+              "type": "boolean",
+              "default": true
+            },
+            "checkInterval": {
+              "type": "integer",
+              "default": 86400000
+            },
+            "autoDownload": {
+              "type": "boolean",
+              "default": false
+            },
+            "autoInstall": {
+              "type": "boolean",
+              "default": false
+            },
+            "notifyAvailable": {
+              "type": "boolean",
+              "default": true
+            },
+            "updateChannel": {
+              "type": "string",
+              "default": "stable"
+            },
+            "updateUrl": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "version"
+  ],
+  "definitions": {},
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "modules": {
+            "properties": {
+              "animation": {
+                "properties": {
+                  "enabled": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "modules": {
+            "properties": {
+              "animation": {
+                "properties": {
+                  "durations": {
+                    "description": "Animation durations are ignored when animations are disabled"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "dependencies": {
+    "modules": {
+      "properties": {
+        "servicesIntegration": {
+          "dependencies": {
+            "weather": {
+              "properties": {
+                "weather": {
+                  "dependencies": {
+                    "enabled": {
+                      "properties": {
+                        "apiKey": {
+                          "minLength": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
