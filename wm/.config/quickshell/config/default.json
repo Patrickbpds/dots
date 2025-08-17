@@ -1,1 +1,269 @@
-{}
+{
+  "appearance": {
+    "anim": {
+      "curves": {
+        "emphasized": null,
+        "emphasizedAccel": null,
+        "emphasizedDecel": null,
+        "expressiveDefaultSpatial": null,
+        "expressiveEffects": null,
+        "expressiveFastSpatial": null,
+        "standard": null,
+        "standardAccel": null,
+        "standardDecel": null
+      },
+      "durations": {
+        "expressiveDefaultSpatial": 500,
+        "expressiveEffects": 200,
+        "expressiveFastSpatial": 350,
+        "extraLarge": 1000,
+        "large": 600,
+        "normal": 400,
+        "scale": 1,
+        "small": 200
+      }
+    },
+    "font": {
+      "family": {
+        "material": "Material Symbols Rounded",
+        "mono": "JetBrains Mono NF",
+        "sans": "IBM Plex Sans"
+      },
+      "size": {
+        "extraLarge": 28,
+        "large": 18,
+        "larger": 15,
+        "normal": 13,
+        "scale": 1,
+        "small": 11,
+        "smaller": 12
+      }
+    },
+    "padding": {
+      "large": 15,
+      "larger": 12,
+      "normal": 10,
+      "scale": 1,
+      "small": 5,
+      "smaller": 7
+    },
+    "rounding": {
+      "full": 1000,
+      "large": 25,
+      "normal": 17,
+      "scale": 1,
+      "small": 12
+    },
+    "spacing": {
+      "large": 20,
+      "larger": 15,
+      "normal": 12,
+      "scale": 1,
+      "small": 7,
+      "smaller": 10
+    },
+    "transparency": {
+      "base": 0.85,
+      "enabled": false,
+      "layers": 0.4
+    }
+  },
+  "background": {
+    "desktopClock": {
+      "enabled": false
+    },
+    "enabled": true
+  },
+  "bar": {
+    "dragThreshold": 20,
+    "persistent": true,
+    "showOnHover": true,
+    "sizes": {
+      "batteryWidth": 250,
+      "innerHeight": 30,
+      "networkWidth": 320,
+      "trayMenuWidth": 300,
+      "windowPreviewSize": 400
+    },
+    "status": {
+      "showAudio": false,
+      "showBattery": true,
+      "showBluetooth": true,
+      "showKbLayout": false,
+      "showNetwork": true
+    },
+    "workspaces": {
+      "activeIndicator": true,
+      "activeLabel": "󰮯 ",
+      "activeTrail": false,
+      "label": "  ",
+      "occupiedBg": false,
+      "occupiedLabel": "󰮯 ",
+      "rounded": true,
+      "showWindows": true,
+      "shown": 5
+    }
+  },
+  "border": {
+    "rounding": 25,
+    "thickness": 10
+  },
+  "controlCenter": {
+    "sizes": {
+      "heightMult": 0.7,
+      "ratio": 1.7777777777777777
+    }
+  },
+  "dashboard": {
+    "dragThreshold": 50,
+    "enabled": true,
+    "mediaUpdateInterval": 500,
+    "showOnHover": true,
+    "sizes": {
+      "dateTimeWidth": 110,
+      "infoIconSize": 25,
+      "infoWidth": 200,
+      "mediaCoverArtSize": 150,
+      "mediaProgressSweep": 180,
+      "mediaProgressThickness": 8,
+      "mediaVisualiserSize": 80,
+      "mediaWidth": 200,
+      "resourceProgessThickness": 10,
+      "resourceSize": 200,
+      "tabIndicatorHeight": 3,
+      "tabIndicatorSpacing": 5,
+      "weatherWidth": 250
+    },
+    "visualiserBars": 45
+  },
+  "general": {
+    "apps": {
+      "audio": [
+        "pavucontrol"
+      ],
+      "terminal": [
+        "kitty"
+      ]
+    }
+  },
+  "launcher": {
+    "actionPrefix": "\u003e",
+    "dragThreshold": 50,
+    "enableDangerousActions": false,
+    "enabled": true,
+    "maxShown": 8,
+    "maxWallpapers": 9,
+    "sizes": {
+      "itemHeight": 57,
+      "itemWidth": 600,
+      "wallpaperHeight": 200,
+      "wallpaperWidth": 280
+    },
+    "useFuzzy": {
+      "actions": false,
+      "apps": true,
+      "schemes": false,
+      "variants": false,
+      "wallpapers": false
+    },
+    "vimKeybinds": true
+  },
+  "lock": {
+    "maxNotifs": 5,
+    "sizes": {
+      "border": 100,
+      "buttonsWidth": 400,
+      "buttonsWidthSmall": 300,
+      "clockHeight": 200,
+      "clockWidth": 800,
+      "faceSize": 100,
+      "inputHeight": 200,
+      "inputWidth": 600,
+      "largeScreenWidth": 2560,
+      "mediaCoverBorder": 3,
+      "mediaCoverSize": 150,
+      "mediaCoverSizeSmall": 120,
+      "mediaHeight": 170,
+      "mediaHeightSmall": 150,
+      "mediaWidth": 600,
+      "mediaWidthSmall": 450,
+      "smallScreenWidth": 1080,
+      "weatherHeight": 100,
+      "weatherWidth": 400
+    }
+  },
+  "modules": {
+    "launcher": {
+      "sizes": {
+        "itemWidth": 900
+      },
+      "useFuzzy": {
+        "apps": false
+      }
+    }
+  },
+  "notifs": {
+    "actionOnClick": false,
+    "clearThreshold": 0.3,
+    "defaultExpireTimeout": 5000,
+    "expandThreshold": 20,
+    "expire": true,
+    "sizes": {
+      "badge": 20,
+      "image": 41,
+      "width": 400
+    }
+  },
+  "osd": {
+    "enabled": true,
+    "hideDelay": 2000,
+    "sizes": {
+      "sliderHeight": 150,
+      "sliderWidth": 30
+    }
+  },
+  "paths": {
+    "mediaGif": "root:/assets/bongocat.gif",
+    "sessionGif": "root:/assets/kurukuru.gif",
+    "wallpaperDir": "/home/arthur/Pictures/Wallpapers"
+  },
+  "services": {
+    "audioIncrement": 0.1,
+    "useFahrenheit": false,
+    "useTwelveHourClock": false,
+    "weatherLocation": ""
+  },
+  "session": {
+    "commands": {
+      "hibernate": [
+        "systemctl",
+        "hibernate"
+      ],
+      "logout": [
+        "hyprctl",
+        "dispatch",
+        "exit"
+      ],
+      "reboot": [
+        "systemctl",
+        "reboot"
+      ],
+      "shutdown": [
+        "systemctl",
+        "poweroff"
+      ]
+    },
+    "dragThreshold": 30,
+    "enabled": true,
+    "sizes": {
+      "button": 80
+    },
+    "vimKeybinds": true
+  },
+  "winfo": {
+    "sizes": {
+      "detailsWidth": 500,
+      "heightMult": 0.7
+    }
+  }
+}

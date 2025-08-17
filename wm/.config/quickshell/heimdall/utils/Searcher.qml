@@ -38,7 +38,7 @@ Singleton {
     function query(search: string): list<var> {
         search = transformSearch(search);
         if (!search)
-            return [...list];
+            return list.slice();
 
         if (useFuzzy)
             return Fuzzy.go(search, fuzzyPrepped, Object.assign({
