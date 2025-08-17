@@ -3,6 +3,7 @@ pragma Singleton
 import qs.utils
 import Quickshell
 import Quickshell.Io
+import "../utils" as Utils
 
 Singleton {
     id: root
@@ -22,12 +23,65 @@ Singleton {
     property alias lock: adapter.lock
     property alias services: adapter.services
     property alias paths: adapter.paths
+    property alias uiComponents: adapter.uiComponents
+    property alias animation: adapter.animation
+    property alias servicesIntegration: adapter.servicesIntegration
+    property alias behavior: adapter.behavior
     
-    // Signal for configuration changes
+    // Hot reload configuration
+    property var hotReload: ({
+        enabled: true,
+        debounceMs: 500,
+        validateSchema: true,
+        backupOnChange: true
+    })
+    
+    // Signals for configuration changes
     signal configurationChanged()
+    signal configurationSectionChanged(string section)
+    signal appearanceUpdated()
+    signal barConfigUpdated()
+    signal modulesConfigUpdated()
+    signal servicesConfigUpdated()
     
     // Property to track if external config has been loaded
     property bool externalConfigLoaded: false
+    
+    // Track last successful configuration for rollback
+    property var lastValidConfig: null
+    
+    // Configuration version and validation
+    property Utils.ConfigVersionManager versionManager: Utils.ConfigVersionManager {}
+    property Utils.ConfigValidator validator: Utils.ConfigValidator {}
+    
+    // Current configuration version
+    readonly property string configVersion: versionManager.currentVersion
+    
+    // Validation state
+    property bool configValid: true
+    property var validationErrors: []
+    property var validationWarnings: []
+    
+    // Helper function to get nested property value
+    function get(path, defaultValue) {
+        try {
+            const parts = path.split('.')
+            let current = root
+            
+            for (let part of parts) {
+                if (current && current.hasOwnProperty(part)) {
+                    current = current[part]
+                } else {
+                    return defaultValue
+                }
+            }
+            
+            return current !== undefined ? current : defaultValue
+        } catch (error) {
+            console.warn(`[Config] Failed to get ${path}:`, error.toString())
+            return defaultValue
+        }
+    }
     
     // Function to merge external config with defaults
     function mergeConfig(external, defaults) {
@@ -57,8 +111,57 @@ Singleton {
                 return
             }
             
-            const config = JSON.parse(configText)
+            let config = JSON.parse(configText)
             console.log("[Config] Parsing external configuration, version:", config.version || "unknown")
+            
+            // Store last valid config for rollback
+            if (lastValidConfig === null && configValid) {
+                lastValidConfig = JSON.stringify(config)
+            }
+            
+            // Check if migration is needed
+            if (versionManager.needsMigration(config)) {
+                console.log("[Config] Configuration needs migration")
+                const backup = versionManager.createBackup(config)
+                config = versionManager.migrateConfiguration(config)
+                
+                if (!config) {
+                    console.error("[Config] Migration failed, using defaults")
+                    externalConfigLoaded = true
+                    return
+                }
+                
+                console.log("[Config] Migration successful to version", versionManager.currentVersion)
+            }
+            
+            // Validate configuration
+            const validationResult = validator.validateConfiguration(config, {
+                required: ["version"]
+            })
+            
+            configValid = validationResult.valid
+            validationErrors = validationResult.errors
+            validationWarnings = validationResult.warnings
+            
+            if (!validationResult.valid) {
+                console.error("[Config] Configuration validation failed:")
+                validationResult.errors.forEach(error => console.error("  -", error))
+            }
+            
+            if (validationResult.warnings.length > 0) {
+                console.warn("[Config] Configuration warnings:")
+                validationResult.warnings.forEach(warning => console.warn("  -", warning))
+            }
+            
+            // Apply hot reload configuration
+            if (config.hotReload) {
+                console.log("[Config] Applying hot reload configuration")
+                for (let key in config.hotReload) {
+                    if (hotReload.hasOwnProperty(key)) {
+                        hotReload[key] = config.hotReload[key]
+                    }
+                }
+            }
             
             // Apply module configurations with defaults
             if (config.modules) {
@@ -104,6 +207,8 @@ Singleton {
                             console.log("[Config]   - bar." + key + ":", config.modules.bar[key])
                         }
                     }
+                    barConfigUpdated()
+                    configurationSectionChanged("bar")
                 }
                 
                 // Dashboard config
@@ -140,6 +245,8 @@ Singleton {
                         console.log("[Config]   - appearance." + key + ":", config.appearance[key])
                     }
                 }
+                appearanceUpdated()
+                configurationSectionChanged("appearance")
             }
             
             // Apply general config
@@ -208,6 +315,10 @@ Singleton {
             property LockConfig lock: LockConfig {}
             property ServiceConfig services: ServiceConfig {}
             property UserPaths paths: UserPaths {}
+            property UIComponentsConfig uiComponents: UIComponentsConfig {}
+            property AnimationConfig animation: AnimationConfig {}
+            property ServicesIntegrationConfig servicesIntegration: ServicesIntegrationConfig {}
+            property BehaviorConfig behavior: BehaviorConfig {}
         }
     }
 }
