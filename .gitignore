@@ -70,3 +70,4 @@ temp/
 .tmp/
 node_modules
 fish_variables
+work/

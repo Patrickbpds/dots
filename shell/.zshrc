@@ -60,4 +60,3 @@ setopt hist_find_no_dups
 
 # Sources
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
