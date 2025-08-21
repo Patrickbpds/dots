@@ -5,7 +5,7 @@
 add_newline = true
 command_timeout = 2000
 
-format = """$env_var$os$username$hostname$kubernetes$directory$git_branch$git_status
+format = """$env_var$os$shell$username$hostname$kubernetes$directory$git_branch$git_status
 $character
 """
 right_format = """$all"""
@@ -17,7 +17,7 @@ error_symbol = "╰─▶"
 
 [env_var]
 symbol = "╭╴"
-variable = 'SHELL'
+variable = "SHELL"
 format = "$symbol"
 disabled = false
 
@@ -31,6 +31,18 @@ Arch = '󰣇'
 Ubuntu = ''
 Macos = '󰀵'
 Unknown = '󰠥'
+
+[shell]
+fish_indicator = '󰈺 '
+bash_indicator = "󱌣"
+zsh_indicator = "󱓞"
+powershell_indicator = ""
+nu_indicator = "󰮄"
+elvish_indicator = ""
+unknown_indicator = ""
+format = '[]($style) [$indicator]($style) '
+style = 'bold'
+disabled = false
 
 # Shows the username
 [username]

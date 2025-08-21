@@ -1,38 +1,63 @@
-#            _
-#    _______| |__  _ __ ___
-#   |_  / __| '_ \| '__/ __|
-#  _ / /\__ \ | | | | | (__
-# (_)___|___/_| |_|_|  \___|
-#
-# -----------------------------------------------------
-# ML4W zshrc loader
-# -----------------------------------------------------
+#!/usr/bin/env zsh
 
-# DON'T CHANGE THIS FILE
+export XDG_CONFIG_HOME="$HOME/.config"
+export ZSH_CONFIG_DIR="$XDG_CONFIG_HOME/zsh"
 
-# You can define your custom configuration by adding
-# files in ~/.config/zshrc
-# or by creating a folder ~/.config/zshrc/custom
-# with copies of files from ~/.config/zshrc
-# -----------------------------------------------------
+# Load Helpers
+[[ -f "$ZSH_CONFIG_DIR/helpers.zsh" ]] && source "$ZSH_CONFIG_DIR/helpers.zsh"
 
-# -----------------------------------------------------
-# Load modular configuration
-# -----------------------------------------------------
+# Load Package Manager (zinit)
+[[ -f "$ZSH_CONFIG_DIR/zinit.zsh" ]] && source "$ZSH_CONFIG_DIR/zinit.zsh"
 
-for f in ~/.config/zshrc/*; do
-    if [ ! -d $f ]; then
-        c=`echo $f | sed -e "s=.config/zshrc=.config/zshrc/custom="`
-        [[ -f $c ]] && source $c || source $f
-    fi
-done
-
-# -----------------------------------------------------
-# Load single customization file (if exists)
-# -----------------------------------------------------
-
-if [ -f ~/.zshrc_custom ]; then
-    source ~/.zshrc_custom
+# Source all config files
+if [ -d "$ZSH_CONFIG_DIR/config" ] && [ "$(ls -A "$ZSH_CONFIG_DIR/config")" ]; then
+  for file in "$ZSH_CONFIG_DIR/config/"*; do
+    source "$file"
+  done
 fi
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+# Load All work private files
+if [ -d "$ZSH_CONFIG_DIR/work" ] && [ "$(ls -A "$ZSH_CONFIG_DIR/work")" ]; then
+  for file in "$ZSH_CONFIG_DIR/work/"*; do
+    source "$file"
+  done
+fi
+
+# Load All Programs from /programs
+if [ -d "$ZSH_CONFIG_DIR/programs" ] && [ "$(ls -A "$ZSH_CONFIG_DIR/programs")" ]; then
+  for file in "$ZSH_CONFIG_DIR/programs/"*; do
+    source "$file"
+  done
+fi
+
+# If software-development is not a directory, create it
+if [ ! -d ~/software-development ]; then
+    mkdir -p ~/software-development/work
+fi
+
+# Settings
+
+# Vim Keybindings
+bindkey -v
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^[w' kill-region
+
+export KEYTIMEOUT=1
+
+# History
+HISTSIZE=1000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Sources
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
