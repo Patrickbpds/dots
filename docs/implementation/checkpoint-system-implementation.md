@@ -28,10 +28,424 @@ Complete implementation of the checkpoint monitoring system for parallel agent e
   - Time tracking per task
   - Progress percentage calculation
 
-### 3. Agent-Specific Configurations
+### Implementation Agent Three-Step Checkpoint Configuration
+
+#### Enhanced Checkpoint Structure for Three-Step Pattern
+```python
+class ImplementationAgentCheckpoint:
+    """Checkpoint configuration for Implementation Agent with three-step pattern."""
+    
+    @staticmethod
+    def get_checkpoint_config():
+        return {
+            "interval": 300,  # 5 minutes
+            "architecture": "three_step",
+            "phases": {
+                "🔧 Core Implementation": {
+                    "steps": [
+                        {
+                            "name": "🔧 Core Implementation",
+                            "subagent": "@executor",
+                            "tasks": [
+                                "implement_foundational_components",
+                                "create_data_models", 
+                                "build_core_functionality",
+                                "establish_architecture"
+                            ],
+                            "expected_duration": 600,  # 10 minutes
+                            "parallel_work": ["data models", "core services", "base classes"]
+                        },
+                        {
+                            "name": "✅ Core Validation",
+                            "subagent": "@validator", 
+                            "tasks": [
+                                "validate_compilation",
+                                "run_basic_tests",
+                                "check_dependencies",
+                                "fix_critical_issues"
+                            ],
+                            "expected_duration": 300,  # 5 minutes
+                            "quality_gate": True,
+                            "parallel_work": ["syntax check", "unit tests", "integration tests"]
+                        },
+                        {
+                            "name": "📝 Core Documentation",
+                            "subagent": "@documenter",
+                            "tasks": [
+                                "update_dev_log",
+                                "document_architecture", 
+                                "record_decisions",
+                                "update_progress"
+                            ],
+                            "expected_duration": 180,  # 3 minutes
+                            "parallel_work": ["dev log", "architecture docs", "API specs"]
+                        }
+                    ]
+                },
+                "⚡ Feature Implementation": {
+                    "steps": [
+                        {
+                            "name": "⚡ Feature Implementation",
+                            "subagent": "@executor",
+                            "tasks": [
+                                "implement_business_logic",
+                                "create_api_endpoints",
+                                "build_user_interfaces",
+                                "implement_features"
+                            ],
+                            "expected_duration": 900,  # 15 minutes
+                            "parallel_work": ["business logic", "API endpoints", "user interfaces"]
+                        },
+                        {
+                            "name": "✅ Feature Validation",
+                            "subagent": "@validator",
+                            "tasks": [
+                                "run_integration_tests",
+                                "validate_features",
+                                "fix_bugs",
+                                "check_regressions"
+                            ],
+                            "expected_duration": 480,  # 8 minutes
+                            "quality_gate": True,
+                            "parallel_work": ["feature tests", "integration tests", "bug fixes"]
+                        },
+                        {
+                            "name": "📝 Feature Documentation",
+                            "subagent": "@documenter",
+                            "tasks": [
+                                "document_features",
+                                "create_usage_examples",
+                                "update_api_docs",
+                                "update_dev_log"
+                            ],
+                            "expected_duration": 240,  # 4 minutes
+                            "parallel_work": ["feature specs", "usage examples", "API docs"]
+                        }
+                    ]
+                },
+                "🔗 Integration Implementation": {
+                    "steps": [
+                        {
+                            "name": "🔗 Integration Implementation", 
+                            "subagent": "@executor",
+                            "tasks": [
+                                "connect_components",
+                                "implement_cross_cutting",
+                                "handle_edge_cases",
+                                "system_integration"
+                            ],
+                            "expected_duration": 720,  # 12 minutes
+                            "parallel_work": ["component integration", "cross-cutting concerns", "edge cases"]
+                        },
+                        {
+                            "name": "✅ Integration Validation",
+                            "subagent": "@validator",
+                            "tasks": [
+                                "run_system_tests",
+                                "validate_integration",
+                                "performance_testing",
+                                "end_to_end_tests"
+                            ],
+                            "expected_duration": 600,  # 10 minutes
+                            "quality_gate": True,
+                            "parallel_work": ["system tests", "integration validation", "performance tests"]
+                        },
+                        {
+                            "name": "📝 Integration Documentation",
+                            "subagent": "@documenter",
+                            "tasks": [
+                                "document_integration",
+                                "system_architecture",
+                                "validation_results",
+                                "update_dev_log"
+                            ],
+                            "expected_duration": 240,  # 4 minutes
+                            "parallel_work": ["integration patterns", "system docs", "validation results"]
+                        }
+                    ]
+                },
+                "🚀 Optimization Implementation": {
+                    "steps": [
+                        {
+                            "name": "🚀 Optimization Implementation",
+                            "subagent": "@executor", 
+                            "tasks": [
+                                "optimize_performance",
+                                "code_cleanup",
+                                "refactor_code",
+                                "final_polish"
+                            ],
+                            "expected_duration": 480,  # 8 minutes
+                            "parallel_work": ["performance optimization", "code cleanup", "refactoring"]
+                        },
+                        {
+                            "name": "✅ Final Validation",
+                            "subagent": "@validator",
+                            "tasks": [
+                                "comprehensive_testing",
+                                "security_scanning",
+                                "quality_validation",
+                                "deployment_checks"
+                            ],
+                            "expected_duration": 480,  # 8 minutes
+                            "quality_gate": True,
+                            "parallel_work": ["comprehensive testing", "security scanning", "quality validation"]
+                        },
+                        {
+                            "name": "📝 Final Documentation",
+                            "subagent": "@documenter",
+                            "tasks": [
+                                "complete_documentation",
+                                "deployment_guides",
+                                "final_status_report",
+                                "dev_log_completion"
+                            ],
+                            "expected_duration": 300,  # 5 minutes
+                            "parallel_work": ["final documentation", "deployment guides", "status report"]
+                        }
+                    ]
+                }
+            },
+            "convergence_points": [
+                {"name": "core_complete", "after_phase": "🔧 Core Implementation", "at_progress": 25},
+                {"name": "features_complete", "after_phase": "⚡ Feature Implementation", "at_progress": 50},
+                {"name": "integration_complete", "after_phase": "🔗 Integration Implementation", "at_progress": 75},
+                {"name": "final_complete", "after_phase": "🚀 Optimization Implementation", "at_progress": 100}
+            ],
+            "quality_gates": [
+                {"after_step": "✅ Core Validation", "threshold": 100, "required": True},
+                {"after_step": "✅ Feature Validation", "threshold": 95, "required": True},
+                {"after_step": "✅ Integration Validation", "threshold": 98, "required": True},
+                {"after_step": "✅ Final Validation", "threshold": 100, "required": True}
+            ],
+            "stuck_detection": {
+                "no_progress_threshold": 600,  # 10 minutes
+                "step_timeout_multiplier": 1.5,  # 1.5x expected duration
+                "quality_gate_failure_threshold": 3,  # max attempts
+                "recovery_strategy": "step_retry_then_phase_fallback"
+            }
+        }
+```
+
+#### Enhanced Checkpoint Data Structures
+
+```python
+@dataclass
+class ThreeStepCheckpoint:
+    """Enhanced checkpoint for three-step pattern."""
+    
+    # Basic checkpoint info
+    checkpoint_id: str
+    timestamp: datetime
+    agent_type: str = "implement"
+    
+    # Three-step pattern tracking
+    current_phase: str  # "🔧 Core Implementation"
+    current_step: str   # "✅ Core Validation"
+    current_subagent: str  # "@validator"
+    
+    # Progress tracking
+    phase_progress: Dict[str, str]  # {"🔧 Core": "✅ Complete", "⚡ Feature": "⏳ Step 2/3"}
+    step_progress: Dict[str, float]  # {"🔧 Core Implementation": 100, "✅ Core Validation": 65}
+    overall_progress: float
+    
+    # Quality gates
+    quality_gates: Dict[str, str]  # {"core_gate": "✅ PASSED", "feature_gate": "⏳ In Progress"}
+    current_gate_status: str  # "✅ PASSED", "⏳ In Progress", "❌ FAILED"
+    current_gate_score: float
+    
+    # Step details
+    executor_progress: Dict[str, Any]
+    validator_progress: Dict[str, Any] 
+    documenter_progress: Dict[str, Any]
+    
+    # Issues and blockers
+    current_blockers: List[str]
+    quality_issues: List[str]
+    step_failures: List[str]
+    
+    # Next actions
+    next_actions: List[str]
+    estimated_completion: datetime
+```
+
+#### Enhanced Reporting for Three-Step Pattern
+
+```python
+class ThreeStepCheckpointReporter:
+    """Enhanced reporter for three-step checkpoint pattern."""
+    
+    def format_three_step_report(self, checkpoint: ThreeStepCheckpoint) -> str:
+        """Generate three-step pattern checkpoint report."""
+        
+        lines = []
+        lines.append(f"\n{'='*80}")
+        lines.append(f"[THREE-STEP CHECKPOINT] {checkpoint.timestamp}")
+        lines.append(f"{'='*80}")
+        
+        # Current Status
+        lines.append(f"\n📍 CURRENT STATUS")
+        lines.append(f"Phase: {checkpoint.current_phase}")
+        lines.append(f"Step: {checkpoint.current_step} ({checkpoint.step_progress.get(checkpoint.current_step, 0):.1f}%)")
+        lines.append(f"Subagent: {checkpoint.current_subagent}")
+        lines.append(f"Overall Progress: {checkpoint.overall_progress:.1f}%")
+        
+        # Phase Progress Breakdown
+        lines.append(f"\n🔄 PHASE PROGRESS")
+        phase_emojis = {
+            "🔧 Core Implementation": "🔧",
+            "⚡ Feature Implementation": "⚡", 
+            "🔗 Integration Implementation": "🔗",
+            "🚀 Optimization Implementation": "🚀"
+        }
+        
+        for phase, status in checkpoint.phase_progress.items():
+            emoji = phase_emojis.get(phase, "📋")
+            lines.append(f"  {emoji} {phase}: {status}")
+        
+        # Quality Gates Status
+        if checkpoint.quality_gates:
+            lines.append(f"\n✅ QUALITY GATES")
+            for gate, status in checkpoint.quality_gates.items():
+                gate_emoji = "✅" if "PASSED" in status else "⏳" if "Progress" in status else "❌"
+                lines.append(f"  {gate_emoji} {gate}: {status}")
+            
+            if checkpoint.current_gate_status != "PASSED":
+                lines.append(f"\nCurrent Gate: {checkpoint.current_gate_status} ({checkpoint.current_gate_score:.1f}%)")
+        
+        # Step Details
+        lines.append(f"\n📋 STEP DETAILS")
+        if checkpoint.executor_progress:
+            lines.append(f"  🔧 Executor: {checkpoint.executor_progress.get('status', 'Unknown')}")
+            if 'components_completed' in checkpoint.executor_progress:
+                lines.append(f"     Components: {checkpoint.executor_progress['components_completed']}/{checkpoint.executor_progress.get('total_components', '?')}")
+        
+        if checkpoint.validator_progress:
+            lines.append(f"  ✅ Validator: {checkpoint.validator_progress.get('status', 'Unknown')}")
+            if 'issues_found' in checkpoint.validator_progress:
+                found = checkpoint.validator_progress['issues_found']
+                fixed = checkpoint.validator_progress.get('issues_fixed', 0)
+                lines.append(f"     Issues: {fixed}/{found} fixed")
+        
+        if checkpoint.documenter_progress:
+            lines.append(f"  📝 Documenter: {checkpoint.documenter_progress.get('status', 'Unknown')}")
+            if 'sections_completed' in checkpoint.documenter_progress:
+                lines.append(f"     Sections: {checkpoint.documenter_progress['sections_completed']}/{checkpoint.documenter_progress.get('total_sections', '?')}")
+        
+        # Blockers and Issues
+        if checkpoint.current_blockers:
+            lines.append(f"\n⚠️  ACTIVE BLOCKERS ({len(checkpoint.current_blockers)})")
+            for blocker in checkpoint.current_blockers[:3]:
+                lines.append(f"  - {blocker}")
+        
+        if checkpoint.quality_issues:
+            lines.append(f"\n🔍 QUALITY ISSUES ({len(checkpoint.quality_issues)})")
+            for issue in checkpoint.quality_issues[:3]:
+                lines.append(f"  - {issue}")
+        
+        # Next Actions
+        lines.append(f"\n⏭️  NEXT ACTIONS")
+        for action in checkpoint.next_actions[:5]:
+            lines.append(f"  • {action}")
+        
+        # Timing
+        lines.append(f"\n⏰ TIMING")
+        lines.append(f"Estimated Completion: {checkpoint.estimated_completion}")
+        
+        lines.append(f"{'='*80}")
+        
+        return "\n".join(lines)
+    
+    def get_step_progress_indicator(self, step_name: str, progress: float) -> str:
+        """Get visual progress indicator for a step."""
+        if progress >= 100:
+            return "✅"
+        elif progress >= 75:
+            return "🔄" 
+        elif progress >= 50:
+            return "⏳"
+        elif progress > 0:
+            return "▶️"
+        else:
+            return "⏸️"
+```
+
+### Example Three-Step Checkpoint Output
+
+```
+================================================================================
+[THREE-STEP CHECKPOINT] 2025-08-17 10:30:00
+================================================================================
+
+📍 CURRENT STATUS
+Phase: ⚡ Feature Implementation
+Step: ✅ Feature Validation (65.0%)
+Subagent: @validator
+Overall Progress: 42.5%
+
+🔄 PHASE PROGRESS
+  🔧 🔧 Core Implementation: ✅ Complete (All steps finished)
+  ⚡ ⚡ Feature Implementation: ⏳ Step 2/3 (Validation in progress)
+  🔗 🔗 Integration Implementation: ⏸️ Pending
+  🚀 🚀 Optimization Implementation: ⏸️ Pending
+
+✅ QUALITY GATES
+  ✅ core_gate: ✅ PASSED (100.0%)
+  ⏳ feature_gate: ⏳ In Progress (87.5%)
+  ⏸️ integration_gate: ⏸️ Pending
+  ⏸️ final_gate: ⏸️ Pending
+
+Current Gate: ⏳ In Progress (87.5%)
+
+📋 STEP DETAILS
+  🔧 Executor: ✅ Complete
+     Components: 8/8 implemented
+  ✅ Validator: ⏳ In Progress
+     Issues: 5/7 fixed
+  📝 Documenter: ⏸️ Pending
+
+⚠️  ACTIVE BLOCKERS (1)
+  - Feature validation timeout in auth module
+
+⏭️  NEXT ACTIONS
+  • ✅ @validator: Fix remaining 2 feature validation issues
+  • ✅ @validator: Complete integration test suite
+  • 📝 @documenter: Document feature implementation progress
+  • 🔗 @executor: Prepare for integration implementation phase
+
+⏰ TIMING
+Estimated Completion: 2025-08-17 11:15:00
+================================================================================
+```
+
+## Integration Benefits
+
+### 1. Enhanced Quality Assurance
+- **Step-by-step validation** ensures immediate issue detection
+- **Quality gates** prevent progression with unresolved issues  
+- **Comprehensive testing** at each validation step
+- **Documentation completeness** verified at each phase
+
+### 2. Improved Progress Visibility
+- **Clear phase and step identification** with emojis
+- **Detailed progress tracking** for each subagent
+- **Quality gate status** provides immediate feedback
+- **Next actions** clearly defined for continuation
+
+### 3. Better Error Recovery
+- **Step-level failure isolation** prevents cascade failures
+- **Quality gate recovery** procedures for validation issues
+- **Phase-level fallback** strategies for major problems
+- **Comprehensive error context** for debugging
+
+### 4. Predictable Workflow
+- **Structured progression** through phases and steps
+- **Time estimation** based on step-level metrics
+- **Resource planning** with parallel work within steps
+- **Coordination overhead** minimized through clear boundaries
 Implemented checkpoint configurations for:
 - **Planning Agent:** 3 parallel streams, 5-minute intervals
-- **Implementation Agent:** 4 parallel streams, 5-minute intervals  
+- **Implementation Agent:** Updated to three-step pattern, 4 phases × 3 steps, 5-minute intervals  
 - **Debug Agent:** 4 parallel streams, 3-minute intervals
 - **Research Agent:** 3 parallel streams, 5-minute intervals
 - **Test Agent:** 3 parallel streams, 5-minute intervals

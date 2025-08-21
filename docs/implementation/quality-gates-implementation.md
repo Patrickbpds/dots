@@ -486,48 +486,327 @@ class PlanningAgentQualityGates:
         return gates
 ```
 
-#### Implementation Agent Gates
+#### Implementation Agent Three-Step Quality Gates
 ```python
-class ImplementationAgentQualityGates:
-    """Quality gates specific to Implementation Agent."""
+class ImplementationAgentThreeStepQualityGates:
+    """Quality gates for Implementation Agent three-step pattern."""
     
     @staticmethod
     def create_all_gates() -> Dict[str, QualityGate]:
-        """Create all quality gates for Implementation Agent."""
+        """Create all quality gates for three-step pattern."""
         gates = {}
         
-        # Code Complete Gate
-        gate = QualityGate("code_complete", "barrier")
+        # Core Validation Gate (after ✅ Core Validation step)
+        gate = QualityGate("core_validation", "barrier")
         gate.add_criterion({
-            "id": "compilation_success",
-            "name": "Code Compiles Without Errors",
+            "id": "code_compilation",
+            "name": "Core Code Compiles Successfully", 
+            "type": "correctness",
+            "validator": ThreeStepValidationCriteria.compilation_validator(),
+            "threshold": 1.0,
+            "weight": 1.0,
+            "required": True,
+            "description": "All core code must compile without errors"
+        })
+        gate.add_criterion({
+            "id": "basic_functionality", 
+            "name": "Basic Functionality Tests Pass",
+            "type": "correctness",
+            "validator": ThreeStepValidationCriteria.basic_tests_validator(),
+            "threshold": 1.0,
+            "weight": 1.0,
+            "required": True,
+            "description": "Core functionality must work as expected"
+        })
+        gate.add_criterion({
+            "id": "architecture_integrity",
+            "name": "Architecture Integrity Maintained",
+            "type": "consistency", 
+            "validator": ThreeStepValidationCriteria.architecture_validator(),
+            "threshold": 1.0,
+            "weight": 0.9,
+            "required": True,
+            "description": "Core architecture must be consistent and sound"
+        })
+        gates["core_validation"] = gate
+        
+        # Feature Validation Gate (after ✅ Feature Validation step)
+        gate = QualityGate("feature_validation", "barrier")
+        gate.add_criterion({
+            "id": "feature_functionality",
+            "name": "All Features Function Correctly",
+            "type": "correctness",
+            "validator": ThreeStepValidationCriteria.feature_functionality_validator(),
+            "threshold": 1.0,
+            "weight": 1.0,
+            "required": True,
+            "description": "All implemented features must work correctly"
+        })
+        gate.add_criterion({
+            "id": "integration_tests",
+            "name": "Integration Tests Pass",
+            "type": "correctness", 
+            "validator": ValidationCriteria.correctness_validator(0.05),
+            "threshold": 0.95,
+            "weight": 1.0,
+            "required": True,
+            "description": "95% of integration tests must pass"
+        })
+        gate.add_criterion({
+            "id": "no_regressions",
+            "name": "No Regressions in Core Functionality",
+            "type": "consistency",
+            "validator": ValidationCriteria.consistency_validator(),
+            "threshold": 1.0,
+            "weight": 1.0,
+            "required": True,
+            "description": "Core functionality must not be broken by new features"
+        })
+        gates["feature_validation"] = gate
+        
+        # Integration Validation Gate (after ✅ Integration Validation step)
+        gate = QualityGate("integration_validation", "barrier")
+        gate.add_criterion({
+            "id": "system_integration",
+            "name": "Full System Integration Works",
+            "type": "correctness",
+            "validator": ThreeStepValidationCriteria.system_integration_validator(),
+            "threshold": 1.0,
+            "weight": 1.0,
+            "required": True,
+            "description": "All system components must integrate properly"
+        })
+        gate.add_criterion({
+            "id": "performance_acceptable",
+            "name": "Performance Within Acceptable Limits",
+            "type": "performance",
+            "validator": ValidationCriteria.performance_validator(baseline_time=2.0),
+            "threshold": 1.0,
+            "weight": 0.8,
+            "required": True,
+            "description": "System performance must meet requirements"
+        })
+        gate.add_criterion({
+            "id": "end_to_end_tests",
+            "name": "End-to-End Tests Pass", 
+            "type": "correctness",
+            "validator": ValidationCriteria.correctness_validator(0.05),
+            "threshold": 0.95,
+            "weight": 1.0,
+            "required": True,
+            "description": "95% of end-to-end tests must pass"
+        })
+        gates["integration_validation"] = gate
+        
+        # Final Validation Gate (after ✅ Final Validation step)
+        gate = QualityGate("final_validation", "barrier")
+        gate.add_criterion({
+            "id": "comprehensive_test_suite",
+            "name": "Comprehensive Test Suite Passes",
             "type": "correctness",
             "validator": ValidationCriteria.correctness_validator(0.0),
             "threshold": 1.0,
             "weight": 1.0,
             "required": True,
-            "description": "All code must compile successfully"
+            "description": "All tests in comprehensive suite must pass"
         })
         gate.add_criterion({
-            "id": "feature_complete",
-            "name": "All Features Implemented",
-            "type": "completeness",
-            "validator": ValidationCriteria.completeness_validator(1.0),
+            "id": "security_scan_clean",
+            "name": "Security Scan Results Clean", 
+            "type": "correctness",
+            "validator": ValidationCriteria.correctness_validator(0.0),
             "threshold": 1.0,
             "weight": 1.0,
             "required": True,
-            "description": "100% of required features implemented"
+            "description": "No security vulnerabilities detected"
         })
         gate.add_criterion({
-            "id": "code_quality",
-            "name": "Code Quality Standards Met",
-            "type": "correctness",
-            "validator": ValidationCriteria.correctness_validator(0.05),
-            "threshold": 0.95,
-            "weight": 0.8,
+            "id": "deployment_ready",
+            "name": "Deployment Ready",
+            "type": "completeness", 
+            "validator": ThreeStepValidationCriteria.deployment_readiness_validator(),
+            "threshold": 1.0,
+            "weight": 0.9,
             "required": True,
-            "description": "Code meets quality standards (max 5% issues)"
+            "description": "System must be ready for deployment"
         })
+        gate.add_criterion({
+            "id": "documentation_complete",
+            "name": "Documentation Complete and Accurate",
+            "type": "completeness",
+            "validator": ValidationCriteria.completeness_validator(0.95),
+            "threshold": 0.95,
+            "weight": 0.7,
+            "required": False,
+            "description": "Documentation should be complete and accurate"
+        })
+        gates["final_validation"] = gate
+        
+        return gates
+
+# Additional validation criteria for three-step pattern
+class ThreeStepValidationCriteria:
+    """Validation criteria specific to three-step pattern."""
+    
+    @staticmethod
+    def compilation_validator():
+        """Validate that all code compiles successfully."""
+        def validate(outputs: Dict[str, Any]) -> Tuple[float, bool, Dict]:
+            compilation_results = outputs.get("compilation_results", {})
+            total_files = compilation_results.get("total_files", 1)
+            successful_compiles = compilation_results.get("successful", 0)
+            
+            if total_files == 0:
+                return 1.0, True, {"reason": "No files to compile"}
+            
+            success_rate = successful_compiles / total_files
+            passed = success_rate == 1.0  # Must be 100% for compilation
+            
+            details = {
+                "total_files": total_files,
+                "successful": successful_compiles,
+                "failed": total_files - successful_compiles,
+                "success_rate": success_rate,
+                "reason": f"Compilation: {successful_compiles}/{total_files} files successful"
+            }
+            
+            return success_rate, passed, details
+        
+        return validate
+    
+    @staticmethod
+    def basic_tests_validator():
+        """Validate that basic functionality tests pass."""
+        def validate(outputs: Dict[str, Any]) -> Tuple[float, bool, Dict]:
+            test_results = outputs.get("basic_test_results", {})
+            total_tests = test_results.get("total", 1)
+            passing_tests = test_results.get("passed", 0)
+            
+            if total_tests == 0:
+                return 0.0, False, {"reason": "No basic tests found"}
+            
+            pass_rate = passing_tests / total_tests
+            passed = pass_rate == 1.0  # Must be 100% for basic tests
+            
+            details = {
+                "total_tests": total_tests,
+                "passed": passing_tests, 
+                "failed": total_tests - passing_tests,
+                "pass_rate": pass_rate,
+                "reason": f"Basic tests: {passing_tests}/{total_tests} passed"
+            }
+            
+            return pass_rate, passed, details
+        
+        return validate
+    
+    @staticmethod
+    def architecture_validator():
+        """Validate architectural integrity."""
+        def validate(outputs: Dict[str, Any]) -> Tuple[float, bool, Dict]:
+            arch_check = outputs.get("architecture_check", {})
+            violations = arch_check.get("violations", [])
+            warnings = arch_check.get("warnings", [])
+            
+            # Architecture integrity score based on violations
+            violation_penalty = len(violations) * 0.2  # 20% penalty per violation
+            warning_penalty = len(warnings) * 0.05     # 5% penalty per warning
+            
+            score = max(0.0, 1.0 - violation_penalty - warning_penalty)
+            passed = len(violations) == 0  # No violations allowed
+            
+            details = {
+                "violations": len(violations),
+                "warnings": len(warnings),
+                "violation_list": violations[:5],  # First 5
+                "score": score,
+                "reason": f"Architecture check: {len(violations)} violations, {len(warnings)} warnings"
+            }
+            
+            return score, passed, details
+        
+        return validate
+    
+    @staticmethod 
+    def feature_functionality_validator():
+        """Validate that all features work correctly."""
+        def validate(outputs: Dict[str, Any]) -> Tuple[float, bool, Dict]:
+            feature_tests = outputs.get("feature_test_results", {})
+            total_features = feature_tests.get("total_features", 1)
+            working_features = feature_tests.get("working_features", 0)
+            
+            if total_features == 0:
+                return 0.0, False, {"reason": "No features to test"}
+            
+            functionality_rate = working_features / total_features
+            passed = functionality_rate == 1.0  # All features must work
+            
+            details = {
+                "total_features": total_features,
+                "working": working_features,
+                "broken": total_features - working_features,
+                "functionality_rate": functionality_rate,
+                "reason": f"Feature functionality: {working_features}/{total_features} working"
+            }
+            
+            return functionality_rate, passed, details
+        
+        return validate
+    
+    @staticmethod
+    def system_integration_validator():
+        """Validate full system integration."""
+        def validate(outputs: Dict[str, Any]) -> Tuple[float, bool, Dict]:
+            integration_results = outputs.get("integration_results", {})
+            total_integrations = integration_results.get("total_integrations", 1)
+            successful_integrations = integration_results.get("successful", 0)
+            
+            if total_integrations == 0:
+                return 0.0, False, {"reason": "No integrations to test"}
+            
+            integration_rate = successful_integrations / total_integrations
+            passed = integration_rate == 1.0  # All integrations must work
+            
+            details = {
+                "total_integrations": total_integrations,
+                "successful": successful_integrations,
+                "failed": total_integrations - successful_integrations,
+                "integration_rate": integration_rate,
+                "reason": f"System integration: {successful_integrations}/{total_integrations} successful"
+            }
+            
+            return integration_rate, passed, details
+        
+        return validate
+    
+    @staticmethod
+    def deployment_readiness_validator():
+        """Validate deployment readiness."""
+        def validate(outputs: Dict[str, Any]) -> Tuple[float, bool, Dict]:
+            deployment_check = outputs.get("deployment_check", {})
+            required_items = deployment_check.get("required_items", [])
+            completed_items = deployment_check.get("completed_items", [])
+            
+            if not required_items:
+                return 1.0, True, {"reason": "No deployment requirements specified"}
+            
+            completion_rate = len(completed_items) / len(required_items)
+            passed = completion_rate == 1.0  # All items must be complete
+            
+            missing_items = [item for item in required_items if item not in completed_items]
+            
+            details = {
+                "required": len(required_items),
+                "completed": len(completed_items),
+                "missing": missing_items,
+                "completion_rate": completion_rate,
+                "reason": f"Deployment readiness: {len(completed_items)}/{len(required_items)} items complete"
+            }
+            
+            return completion_rate, passed, details
+        
+        return validate
+```
         gates["code_complete"] = gate
         
         # Tests Passing Gate
