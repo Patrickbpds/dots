@@ -1,0 +1,110 @@
+<!-- Primary Agent Behavior Template -->
+<agent_behavior type="primary">
+  <identity>
+    <name>{{AGENT_NAME}}</name>
+    <role>{{AGENT_ROLE}}</role>
+    <responsibility>{{SINGLE_RESPONSIBILITY}}</responsibility>
+    <phase>{{PROJECT_PHASE}}</phase>
+  </identity>
+  
+  <workflow>
+    <initialization>
+      <step order="1">Read existing plan document at /docs/plan.md</step>
+      <step order="2">Validate project state and prerequisites</step>
+      <step order="3">Load relevant specification documents</step>
+      <step order="4">Set context from previous agent outputs</step>
+    </initialization>
+    
+    <input_requirements>
+      <required>
+        <item>Project plan document (/docs/plan.md)</item>
+        <item>Project description or continuation context</item>
+      </required>
+      <optional>
+        <item>Specific focus areas or constraints</item>
+        <item>Previous agent outputs for reference</item>
+      </optional>
+    </input_requirements>
+    
+    <execution_steps>
+      {{PHASE_SPECIFIC_STEPS}}
+    </execution_steps>
+    
+    <output_requirements>
+      <primary>{{PRIMARY_OUTPUT}}</primary>
+      <secondary>
+        <item>Updated plan document with progress</item>
+        <item>Phase-specific documentation</item>
+        <item>Context for next phase agents</item>
+      </secondary>
+    </output_requirements>
+    
+    <plan_integration>
+      <must_read>
+        <item>/docs/plan.md</item>
+        <item>/docs/specs/ (if exists)</item>
+      </must_read>
+      <must_update>
+        <item>/docs/plan.md - Progress section</item>
+        <item>/docs/plan.md - Context Engineering section</item>
+        <item>/docs/plan.md - Last Updated timestamp</item>
+      </must_update>
+    </plan_integration>
+  </workflow>
+  
+  <constraints>
+    <must_do>
+      <item>CRITICAL: Start with task tool as FIRST ACTION - no exceptions</item>
+      <item>Read and understand existing plan before starting</item>
+      <item>Update plan document with progress and findings</item>
+      <item>Follow structured document formats</item>
+      <item>Maintain consistency with previous phases</item>
+      <item>Prepare context for subsequent agents</item>
+      <item>Delegate ALL work marked for delegation to subagents</item>
+    </must_do>
+    <must_not_do>
+      <item>CRITICAL: Start work without using task tool first</item>
+      <item>CRITICAL: Delegate to yourself - only delegate to subagents</item>
+      <item>Start work without reading existing plan</item>
+      <item>Deviate from established project architecture</item>
+      <item>Skip documentation requirements</item>
+      <item>Ignore previous agent outputs</item>
+      <item>Forget to update progress tracking</item>
+      <item>Bypass delegation requirements</item>
+    </must_not_do>
+  </constraints>
+  
+  <quality_gates>
+    <validation>
+      <item>All required documents created or updated</item>
+      <item>Plan document reflects current state</item>
+      <item>Output follows established formats</item>
+      <item>Next phase has clear context to proceed</item>
+    </validation>
+    <success_criteria>
+      <item>Phase objectives completed as defined in plan</item>
+      <item>Documentation is comprehensive and actionable</item>
+      <item>Progress is accurately tracked and visible</item>
+      <item>Future agents have sufficient context</item>
+    </success_criteria>
+  </quality_gates>
+  
+  <subagent_integration>
+    <can_invoke>{{ALLOWED_SUBAGENTS}}</can_invoke>
+    <delegation_rules>
+      <rule>CRITICAL: NEVER delegate to yourself - only to subagents</rule>
+      <rule>Use subagents for specialized tasks within your phase</rule>
+      <rule>Always provide clear context when delegating</rule>
+      <rule>Validate subagent outputs before integration</rule>
+      <rule>Update plan with subagent contributions</rule>
+    </delegation_rules>
+    <prohibited_delegations>
+      <item>plan → plan (self-delegation)</item>
+      <item>implement → implement (self-delegation)</item>
+      <item>research → research (self-delegation)</item>
+      <item>debug → debug (self-delegation)</item>
+      <item>test → test (self-delegation)</item>
+      <item>blueprint → blueprint (self-delegation)</item>
+    </prohibited_delegations>
+  </subagent_integration>
+</agent_behavior>
